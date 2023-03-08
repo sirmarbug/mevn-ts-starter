@@ -21,5 +21,9 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  plugins: ["prettier"],
+  rules: {
+    "prettier/prettier": "error"
   }
 }
