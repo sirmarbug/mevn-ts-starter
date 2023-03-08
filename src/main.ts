@@ -6,9 +6,14 @@ import router from './router'
 
 import './assets/main.css'
 
-const app = createApp(App)
+// Vuetify
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-app.use(createPinia())
-app.use(router)
+const vuetify = createVuetify({
+  components,
+  directives
+})
 
-app.mount('#app')
+createApp(App).use(createPinia()).use(router).use(vuetify).mount('#app')
