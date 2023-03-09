@@ -2,11 +2,17 @@
 import { useI18n } from 'vue-i18n'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pl'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { fetchPosts } from '@/api'
 
 const { t } = useI18n()
 
 const dateTime = ref<string>(dayjs().locale('pl').format('DD MMMM YYYY HH:mm'))
+
+onMounted(async () => {
+  const { data } = await fetchPosts()
+  console.log('data', data)
+})
 </script>
 
 <template>
