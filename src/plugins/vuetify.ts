@@ -3,6 +3,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import type { ThemeDefinition } from 'vuetify/dist/vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 const light: ThemeDefinition = {
   dark: false,
@@ -26,6 +27,13 @@ const vuetify = createVuetify({
   theme: {
     themes: {
       light
+    }
+  },
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi
     }
   }
 })
