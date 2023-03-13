@@ -10,6 +10,9 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import i18n from '@/locales'
 
+// Global styles
+import '@/styles/index.scss'
+
 const vuetify = createVuetify({
   components,
   directives
