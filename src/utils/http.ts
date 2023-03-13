@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const http = axios.create({
   timeout: 3000,
-  baseURL: 'https://jsonplaceholder.typicode.com'
+  baseURL: import.meta.env.VITE_API_URL
 })
 
 http.interceptors.request.use(
