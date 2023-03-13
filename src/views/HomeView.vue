@@ -3,7 +3,7 @@
 <template>
   <main>
     <div class="greetings">
-      <h1 class="text-red">Starter Vue 3 + TS</h1>
+      <h1 class="text-primary">Starter Vue 3 + TS</h1>
       <h3>
         You’ve successfully created a project with
         <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
