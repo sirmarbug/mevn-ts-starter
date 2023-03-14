@@ -1,5 +1,18 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { required, emailValidation } from '@/validations'
+import { ref } from 'vue'
+
+const form = ref<any>(null)
+
+const loginHandle = async () => {
+  const { valid } = await form.value.validate()
+  if (!valid) {
+    return
+  }
+  console.log('login', form.value)
+  localStorage.setItem('token', Math.ceil(Math.random() * 1000).toString())
+}
 </script>
 
 <template>
@@ -20,19 +33,32 @@ import { RouterLink } from 'vue-router'
       </span>
     </v-col>
   </v-row>
-  <v-row no-gutters>
-    <v-col cols="12" sm="6" offset-sm="3">
-      <v-text-field label="Adres E-mail" variant="outlined"></v-text-field>
-    </v-col>
-    <v-col cols="12" sm="6" offset-sm="3">
-      <v-text-field type="password" label="Hasło" variant="outlined"></v-text-field>
-    </v-col>
-  </v-row>
-  <v-row no-gutters class="mb-12">
-    <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center text-center">
-      <v-btn variant="flat" color="primary" block size="large">Zaloguj się</v-btn>
-    </v-col>
-  </v-row>
+  <v-form ref="form" @submit.prevent="loginHandle">
+    <v-row no-gutters>
+      <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
+        <v-text-field
+          label="Adres E-mail"
+          variant="outlined"
+          validate-on="blur"
+          :rules="[required, emailValidation]"
+        ></v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
+        <v-text-field
+          type="password"
+          label="Hasło"
+          variant="outlined"
+          validate-on="blur"
+          :rules="[required]"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row no-gutters class="mb-12">
+      <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center text-center">
+        <v-btn type="submit" variant="flat" color="primary" block size="large">Zaloguj się</v-btn>
+      </v-col>
+    </v-row>
+  </v-form>
   <v-row no-gutters>
     <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center text-center">
       <span class="text-subtitle-1">
