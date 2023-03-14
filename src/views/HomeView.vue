@@ -1,14 +1,44 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GlobalLayout from '@/layouts/GlobalLayout/GlobalLayout.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const goToApp = () => {
+  router.push({ name: 'Login' })
+}
+</script>
 
 <template>
-  <main>
-    <div class="greetings">
-      <h1 class="text-primary">Starter Vue 3 + TS</h1>
-      <h3>
-        You’ve successfully created a project with
-        <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-        <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
-      </h3>
-    </div>
-  </main>
+  <GlobalLayout>
+    <v-row no-gutters>
+      <v-col cols="12" sm="4" offset-sm="4" class="d-flex justify-center">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+      </v-col>
+    </v-row>
+    <v-row no-gutters class="my-6">
+      <v-col
+        cols="12"
+        sm="4"
+        offset-sm="4"
+        class="d-flex flex-column justify-center align-center text-center"
+      >
+        <h1 class="text-primary">Starter Vue 3 + TS</h1>
+        <h2 class="text-primary">v.0.1.0</h2>
+      </v-col>
+    </v-row>
+    <v-row no-gutters>
+      <v-col cols="12">
+        <p>
+          Projekt powstał aby każdy programista mógł rozpocząć pracę z nowym projektem we VueJS w
+          jak naprostszy sposób.
+        </p>
+        <p>Autorem projektu jest <strong>Mariusz Bugajski</strong></p>
+      </v-col>
+    </v-row>
+    <v-row no-gutters class="pt-6">
+      <v-col cols="12" sm="4" offset-sm="4" class="d-flex justify-center text-center">
+        <v-btn variant="flat" color="primary" @click="goToApp">Przejdź do aplikacji</v-btn>
+      </v-col>
+    </v-row>
+  </GlobalLayout>
 </template>
