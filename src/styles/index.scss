@@ -4,3 +4,13 @@ body {
   margin: 0;
   background-color: $background;
 }
+
+a {
+  text-decoration: none;
+  transition: 0.4s;
+  color: $primary;
+
+  &:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
