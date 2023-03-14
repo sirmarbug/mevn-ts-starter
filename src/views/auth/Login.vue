@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { required, emailValidation } from '@/validations'
 import { ref } from 'vue'
+
+const router = useRouter()
 
 const form = ref<any>(null)
 
@@ -12,6 +14,7 @@ const loginHandle = async () => {
   }
   console.log('login', form.value)
   localStorage.setItem('token', Math.ceil(Math.random() * 1000).toString())
+  await router.push({ name: 'Home' })
 }
 
 const showPassword = ref<boolean>()
