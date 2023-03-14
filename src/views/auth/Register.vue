@@ -48,7 +48,7 @@ const toggleShowPasswordHandle = () => {
           label="Imię"
           variant="outlined"
           validate-on="blur"
-          :rules="[required, emailValidation]"
+          :rules="[required]"
         ></v-text-field>
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
@@ -56,7 +56,7 @@ const toggleShowPasswordHandle = () => {
           label="Nazwisko"
           variant="outlined"
           validate-on="blur"
-          :rules="[required, emailValidation]"
+          :rules="[required]"
         ></v-text-field>
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
