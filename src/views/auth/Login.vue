@@ -13,17 +13,23 @@ const loginHandle = async () => {
   console.log('login', form.value)
   localStorage.setItem('token', Math.ceil(Math.random() * 1000).toString())
 }
+
+const showPassword = ref<boolean>()
+
+const toggleShowPasswordHandle = () => {
+  showPassword.value = !showPassword.value
+}
 </script>
 
 <template>
   <v-row no-gutters class="mb-12">
     <v-col cols="12" sm="4" offset-sm="4" class="d-flex justify-center">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="80" height="80" />
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="60" height="60" />
     </v-col>
   </v-row>
   <v-row no-gutters class="mb-6">
     <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center">
-      <span class="text-h3">Starter Vue 3 TS</span>
+      <span class="text-h4">Starter Vue 3 TS</span>
     </v-col>
   </v-row>
   <v-row no-gutters class="mb-12">
@@ -45,11 +51,13 @@ const loginHandle = async () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
-          type="password"
+          :type="showPassword ? 'text' : 'password'"
           label="Hasło"
           variant="outlined"
           validate-on="blur"
+          :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
           :rules="[required]"
+          @click:appendInner="toggleShowPasswordHandle"
         ></v-text-field>
       </v-col>
     </v-row>
