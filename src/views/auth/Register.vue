@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, useRouter } from 'vue-router'
-import { required, emailValidation } from '@/validations'
+import { required, emailValidation, minChars, maxChars } from '@/validations'
 import { ref } from 'vue'
 
 const router = useRouter()
@@ -74,7 +74,7 @@ const toggleShowPasswordHandle = () => {
           variant="outlined"
           validate-on="blur"
           :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-          :rules="[required]"
+          :rules="[required, minChars(6), maxChars(10)]"
           @click:appendInner="toggleShowPasswordHandle"
         ></v-text-field>
       </v-col>
