@@ -7,7 +7,7 @@ defineProps({
 <template>
   <v-row>
     <v-col cols="12">
-      <span class="text-h5 font-weight-bold">{{ title }}</span>
+      <span class="text-h6 font-weight-bold">{{ title }}</span>
     </v-col>
   </v-row>
 </template>

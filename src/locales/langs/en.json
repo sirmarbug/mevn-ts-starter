@@ -1,3 +1,8 @@
 {
-  "hello": "Hello"
+  "exampleTranslations": {
+    "hello": "Hello",
+    "minChars": "The minimum number of characters is {min}",
+    "car": "car | cars",
+    "apple": "no apples | one apple | {count} apples"
+  }
 }

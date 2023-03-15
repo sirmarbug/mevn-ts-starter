@@ -1,3 +1,8 @@
 {
-  "hello": "Witaj"
+  "exampleTranslations": {
+    "hello": "Witaj",
+    "minChars": "Minimalna liczba znaków to {min}",
+    "car": "samochód | samochody",
+    "apple": "brak jabłek | jedno jabłko | {count} jabłek"
+  }
 }
