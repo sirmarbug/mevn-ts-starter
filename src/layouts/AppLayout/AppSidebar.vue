@@ -1,23 +1,49 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const menu = ref([
   {
     icon: 'mdi-monitor-dashboard',
     title: 'Dashboard',
-    value: 'dashboard'
+    value: 'Home',
+    to: '/dashboard/home'
   },
   {
-    icon: 'mdi-chart-bar',
-    title: 'Wykresy',
-    value: 'chars'
+    icon: 'mdi-translate',
+    title: 'Tłumaczenia',
+    value: 'Translate',
+    to: '/dashboard/translate'
+  },
+  {
+    icon: 'mdi-store',
+    title: 'Store',
+    value: 'Store',
+    to: '/dashboard/store'
   },
   {
     icon: 'mdi-vuetify',
     title: 'Vuetify',
-    value: 'vuetify'
+    value: 'Vuetify',
+    to: '/dashboard/vuetify'
+  },
+  {
+    icon: 'mdi-arrow-left-right-bold-outline',
+    title: 'Rest Api',
+    value: 'RestApi',
+    to: '/dashboard/rest-api'
+  },
+  {
+    icon: 'mdi-web',
+    title: 'Websocket',
+    value: 'Websocket',
+    to: '/dashboard/websocket'
   }
 ])
+
+const currentPage = computed(() => route.name)
 </script>
 
 <template>
@@ -26,9 +52,11 @@ const menu = ref([
       <v-list-item
         v-for="(item, index) in menu"
         :key="index"
+        :active="item.value === currentPage"
         :prepend-icon="item.icon"
         :title="item.title"
         :value="item.value"
+        :to="item.to"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>
