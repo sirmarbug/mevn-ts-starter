@@ -59,6 +59,13 @@ const currentPage = computed(() => route.name)
         :to="item.to"
       ></v-list-item>
     </v-list>
+    <template #append>
+      <v-container>
+        <v-row>
+          <v-col class="d-flex justify-center text-secondary font-weight-bold"> v.0.1.0 </v-col>
+        </v-row>
+      </v-container>
+    </template>
   </v-navigation-drawer>
 </template>
 
