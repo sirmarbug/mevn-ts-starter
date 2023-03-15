@@ -10,7 +10,9 @@ import AppSidebar from './AppSidebar.vue'
       <AppNavbar />
       <AppSidebar />
       <v-main>
-        <RouterView />
+        <v-container>
+          <RouterView />
+        </v-container>
       </v-main>
     </v-layout>
   </v-app>
