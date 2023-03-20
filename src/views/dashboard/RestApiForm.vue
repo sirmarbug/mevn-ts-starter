@@ -12,7 +12,26 @@ const route = useRoute()
 
 const usersStore = useUsersStore()
 
+const { add } = usersStore
+
 const isPreviewMode = computed(() => route.name === 'RestApiDetails')
+
+const userForm = ref<any>({
+  name: '',
+  username: '',
+  email: '',
+  phone: '',
+  website: '',
+  company: {
+    name: ''
+  },
+  address: {
+    city: '',
+    street: '',
+    zipcode: '',
+    suite: ''
+  }
+})
 
 const goToRestApi = () => {
   router.push({ name: 'RestApi' })
@@ -25,7 +44,7 @@ const submitHandle = async () => {
   if (!valid) {
     return
   }
-  console.log('submitHandle')
+  add(userForm.value)
 }
 
 onMounted(async () => {
@@ -60,6 +79,7 @@ onMounted(async () => {
                   <v-row>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.name"
                         label="Imię i nazwisko"
                         variant="outlined"
                         validate-on="blur"
@@ -69,6 +89,7 @@ onMounted(async () => {
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.username"
                         label="Username"
                         variant="outlined"
                         validate-on="blur"
@@ -80,6 +101,7 @@ onMounted(async () => {
                   <v-row>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.email"
                         label="Email"
                         variant="outlined"
                         validate-on="blur"
@@ -89,6 +111,7 @@ onMounted(async () => {
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.phone"
                         label="Telefon"
                         variant="outlined"
                         validate-on="blur"
@@ -100,6 +123,7 @@ onMounted(async () => {
                   <v-row>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.company.name"
                         label="Firma"
                         variant="outlined"
                         validate-on="blur"
@@ -108,6 +132,7 @@ onMounted(async () => {
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.website"
                         label="Strona www"
                         variant="outlined"
                         validate-on="blur"
@@ -131,6 +156,7 @@ onMounted(async () => {
                   <v-row>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.address.city"
                         label="Miasto"
                         variant="outlined"
                         validate-on="blur"
@@ -140,6 +166,7 @@ onMounted(async () => {
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.address.street"
                         label="Ulica"
                         variant="outlined"
                         validate-on="blur"
@@ -151,6 +178,7 @@ onMounted(async () => {
                   <v-row>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.address.zipcode"
                         label="Kod pocztowy"
                         variant="outlined"
                         validate-on="blur"
@@ -160,6 +188,7 @@ onMounted(async () => {
                     </v-col>
                     <v-col cols="12" sm="6">
                       <v-text-field
+                        v-model="userForm.address.suite"
                         label="Numer lokalu"
                         variant="outlined"
                         validate-on="blur"
