@@ -84,16 +84,8 @@ onMounted(async () => {
         <v-form ref="form" @submit.prevent="submitHandle">
           <v-row>
             <v-col cols="12">
-              <TitleView title="RestApi" :path="path" actions>
+              <TitleView title="RestApi" :path="path" actions back-action>
                 <template #actions>
-                  <v-btn
-                    flat
-                    variant="text"
-                    :class="{ 'mr-4': isEditMode || isAddMode }"
-                    @click="goToRestApi"
-                  >
-                    Anuluj
-                  </v-btn>
                   <v-btn v-if="!isPreviewMode" type="submit" flat color="primary">
                     {{ isEditMode ? 'Edytuj' : 'Dodaj' }}
                   </v-btn>
