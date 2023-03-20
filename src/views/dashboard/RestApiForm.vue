@@ -6,6 +6,7 @@ import { useUsersStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { fetchUserDetails } from '@/api'
 
 const router = useRouter()
 const route = useRoute()
@@ -48,7 +49,10 @@ const submitHandle = async () => {
 }
 
 onMounted(async () => {
-  // await getAllUser()
+  if (isPreviewMode.value) {
+    const { data } = await fetchUserDetails(route.params.id)
+    userForm.value = data
+  }
 })
 </script>
 
