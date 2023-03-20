@@ -4,16 +4,15 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle.vue'
 import { required, emailValidation } from '@/validations'
 import { useUsersStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
 
 const usersStore = useUsersStore()
 
-const { users } = storeToRefs(usersStore)
-
-const { getAllUser } = usersStore
+const isPreviewMode = computed(() => route.name === 'RestApiDetails')
 
 const goToRestApi = () => {
   router.push({ name: 'RestApi' })
@@ -30,7 +29,7 @@ const submitHandle = async () => {
 }
 
 onMounted(async () => {
-  await getAllUser()
+  // await getAllUser()
 })
 </script>
 
@@ -44,7 +43,7 @@ onMounted(async () => {
               <TitleView title="RestApi" :path="['RestApi', 'Dodaj']" actions>
                 <template #actions>
                   <v-btn flat variant="text" class="mr-4" @click="goToRestApi"> Anuluj </v-btn>
-                  <v-btn type="submit" flat color="primary"> Dodaj </v-btn>
+                  <v-btn v-if="!isPreviewMode" type="submit" flat color="primary"> Dodaj </v-btn>
                 </template>
               </TitleView>
             </v-col>
@@ -65,6 +64,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -73,6 +73,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -83,6 +84,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required, emailValidation]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -91,6 +93,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -100,6 +103,7 @@ onMounted(async () => {
                         label="Firma"
                         variant="outlined"
                         validate-on="blur"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -107,6 +111,7 @@ onMounted(async () => {
                         label="Strona www"
                         variant="outlined"
                         validate-on="blur"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -130,6 +135,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -138,6 +144,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -148,6 +155,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -156,6 +164,7 @@ onMounted(async () => {
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
+                        :disabled="isPreviewMode"
                       ></v-text-field>
                     </v-col>
                   </v-row>

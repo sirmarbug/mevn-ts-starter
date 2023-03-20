@@ -16,6 +16,10 @@ const addNewUserHandle = () => {
   router.push({ name: 'RestApiAdd' })
 }
 
+const showDetails = (user: any) => {
+  router.push({ name: 'RestApiDetails', params: { id: user.id } })
+}
+
 onMounted(async () => {
   await getAllUser()
 })
@@ -54,7 +58,11 @@ onMounted(async () => {
                     <td>
                       <div class="w-100 d-flex justify-end">
                         <v-btn icon flat>
-                          <v-icon icon="mdi-eye-outline" color="secondary"></v-icon>
+                          <v-icon
+                            icon="mdi-eye-outline"
+                            color="secondary"
+                            @click="showDetails(user)"
+                          ></v-icon>
                         </v-btn>
                         <v-btn icon flat>
                           <v-icon icon="mdi-pencil" color="info"></v-icon>
