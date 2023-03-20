@@ -3,11 +3,18 @@ import TitleView from '@/components/TitleView/TitleView.vue'
 import { useUsersStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 const usersStore = useUsersStore()
 
 const { users } = storeToRefs(usersStore)
 
 const { getAllUser } = usersStore
+
+const addNewUserHandle = () => {
+  router.push({ name: 'RestApiAdd' })
+}
 
 onMounted(async () => {
   await getAllUser()
@@ -22,7 +29,7 @@ onMounted(async () => {
           <v-col cols="12">
             <TitleView title="RestApi" :path="['RestApi']" actions>
               <template #actions>
-                <v-btn flat color="primary"> Dodaj </v-btn>
+                <v-btn flat color="primary" @click="addNewUserHandle"> Dodaj </v-btn>
               </template>
             </TitleView>
           </v-col>

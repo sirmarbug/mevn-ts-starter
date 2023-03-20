@@ -62,6 +62,11 @@ const router = createRouter({
           component: () => import('@/views/dashboard/RestApi.vue')
         },
         {
+          path: 'rest-api/add',
+          name: 'RestApiAdd',
+          component: () => import('@/views/dashboard/RestApiForm.vue')
+        },
+        {
           path: 'websocket',
           name: 'Websocket',
           component: () => import('@/views/dashboard/Websocket.vue')
