@@ -36,7 +36,7 @@ const goToApp = () => {
       </v-col>
     </v-row>
     <v-row no-gutters class="pt-6">
-      <v-col cols="12" sm="4" offset-sm="4" class="d-flex justify-center text-center">
+      <v-col cols="12" sm="6" offset-sm="3" class="d-flex justify-center text-center">
         <v-btn variant="flat" color="primary" @click="goToApp">Przejdź do aplikacji</v-btn>
       </v-col>
     </v-row>
