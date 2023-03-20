@@ -2,15 +2,18 @@
 import TitleView from '@/components/TitleView/TitleView.vue'
 import { useUsersStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
+import { defineAsyncComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+const ConfirmRemoveUserDialog = defineAsyncComponent(
+  () => import('@/components/dialogs/ConfirmDialog/ConfirmDialog.vue')
+)
 
 const router = useRouter()
 const usersStore = useUsersStore()
 
 const { users } = storeToRefs(usersStore)
 
-const { getAllUser } = usersStore
+const { getAllUser, remove } = usersStore
 
 const addNewUserHandle = () => {
   router.push({ name: 'RestApiAdd' })
@@ -22,6 +25,25 @@ const showDetails = (user: any) => {
 
 const goToEdit = (user: any) => {
   router.push({ name: 'RestApiEdit', params: { id: user.id } })
+}
+
+const selectedUserToRemove = ref()
+
+const displayConfirmRemoveUserDialog = ref(false)
+
+const removeUserHandle = (user: any) => {
+  displayConfirmRemoveUserDialog.value = true
+  selectedUserToRemove.value = user
+}
+
+const cancelRemoveUserHandle = () => {
+  displayConfirmRemoveUserDialog.value = false
+}
+
+const confirmRemoveUserHandle = async () => {
+  displayConfirmRemoveUserDialog.value = false
+  await remove(selectedUserToRemove.value.id)
+  selectedUserToRemove.value = null
 }
 
 onMounted(async () => {
@@ -72,7 +94,11 @@ onMounted(async () => {
                           <v-icon icon="mdi-pencil" color="info" @click="goToEdit(user)"></v-icon>
                         </v-btn>
                         <v-btn icon flat>
-                          <v-icon icon="mdi-delete" color="error"></v-icon>
+                          <v-icon
+                            icon="mdi-delete"
+                            color="error"
+                            @click="removeUserHandle(user)"
+                          ></v-icon>
                         </v-btn>
                       </div>
                     </td>
@@ -85,6 +111,11 @@ onMounted(async () => {
       </v-container>
     </v-col>
   </v-row>
+  <ConfirmRemoveUserDialog
+    v-if="displayConfirmRemoveUserDialog"
+    @cancel="cancelRemoveUserHandle"
+    @confirm="confirmRemoveUserHandle"
+  />
 </template>
 
 <style scoped></style>

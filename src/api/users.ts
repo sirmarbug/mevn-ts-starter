@@ -15,3 +15,7 @@ export const addUser = (data: any) => {
 export const updateUser = (data: any, id: string | string[]) => {
   return http.put(`users/${id}`, data)
 }
+
+export const removeUser = (id: string | string[]) => {
+  return http.delete(`users/${id}`)
+}

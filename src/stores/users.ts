@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { addUser, fetchUsers, updateUser } from '@/api'
+import { addUser, fetchUsers, removeUser, updateUser } from '@/api'
 
 export const useUsersStore = defineStore('users', () => {
   const users = ref<any>([])
@@ -18,5 +18,10 @@ export const useUsersStore = defineStore('users', () => {
     await updateUser(payload, payload.id)
   }
 
-  return { users, getAllUser, add, update }
+  const remove = async (id: string | string[]) => {
+    await removeUser(id)
+    users.value = users.value.filter((u: any) => u.id !== id)
+  }
+
+  return { users, getAllUser, add, update, remove }
 })
