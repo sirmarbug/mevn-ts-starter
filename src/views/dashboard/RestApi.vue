@@ -20,6 +20,10 @@ const showDetails = (user: any) => {
   router.push({ name: 'RestApiDetails', params: { id: user.id } })
 }
 
+const goToEdit = (user: any) => {
+  router.push({ name: 'RestApiEdit', params: { id: user.id } })
+}
+
 onMounted(async () => {
   await getAllUser()
 })
@@ -65,7 +69,7 @@ onMounted(async () => {
                           ></v-icon>
                         </v-btn>
                         <v-btn icon flat>
-                          <v-icon icon="mdi-pencil" color="info"></v-icon>
+                          <v-icon icon="mdi-pencil" color="info" @click="goToEdit(user)"></v-icon>
                         </v-btn>
                         <v-btn icon flat>
                           <v-icon icon="mdi-delete" color="error"></v-icon>

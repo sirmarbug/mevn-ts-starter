@@ -11,3 +11,7 @@ export const fetchUserDetails = (id: string | string[]) => {
 export const addUser = (data: any) => {
   return http.post('users', data)
 }
+
+export const updateUser = (data: any, id: string | string[]) => {
+  return http.put(`users/${id}`, data)
+}

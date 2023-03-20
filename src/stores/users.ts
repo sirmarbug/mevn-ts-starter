@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { addUser, fetchUsers } from '@/api'
+import { addUser, fetchUsers, updateUser } from '@/api'
 
 export const useUsersStore = defineStore('users', () => {
   const users = ref<any>([])
@@ -14,5 +14,9 @@ export const useUsersStore = defineStore('users', () => {
     users.value.push(data)
   }
 
-  return { users, getAllUser, add }
+  const update = async (payload: any) => {
+    await updateUser(payload, payload.id)
+  }
+
+  return { users, getAllUser, add, update }
 })

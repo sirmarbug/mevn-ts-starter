@@ -3,7 +3,6 @@ import TitleView from '@/components/TitleView/TitleView.vue'
 import SectionTitle from '@/components/SectionTitle/SectionTitle.vue'
 import { required, emailValidation } from '@/validations'
 import { useUsersStore } from '@/stores/users'
-import { storeToRefs } from 'pinia'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchUserDetails } from '@/api'
@@ -12,10 +11,25 @@ const router = useRouter()
 const route = useRoute()
 
 const usersStore = useUsersStore()
+const { add, update } = usersStore
 
-const { add } = usersStore
-
+const isAddMode = computed(() => route.name === 'RestApiAdd')
 const isPreviewMode = computed(() => route.name === 'RestApiDetails')
+const isEditMode = computed(() => route.name === 'RestApiEdit')
+
+const path = computed(() => {
+  const result = ['RestApi']
+  if (isAddMode.value) {
+    result.push('Dodaj')
+  }
+  if (isPreviewMode.value) {
+    result.push('Podgląd')
+  }
+  if (isEditMode.value) {
+    result.push('Edytuj')
+  }
+  return result
+})
 
 const userForm = ref<any>({
   name: '',
@@ -45,11 +59,18 @@ const submitHandle = async () => {
   if (!valid) {
     return
   }
-  add(userForm.value)
+
+  if (isEditMode.value) {
+    await update(userForm.value)
+  } else {
+    await add(userForm.value)
+  }
+
+  goToRestApi()
 }
 
 onMounted(async () => {
-  if (isPreviewMode.value) {
+  if (isPreviewMode.value || isEditMode.value) {
     const { data } = await fetchUserDetails(route.params.id)
     userForm.value = data
   }
@@ -63,10 +84,19 @@ onMounted(async () => {
         <v-form ref="form" @submit.prevent="submitHandle">
           <v-row>
             <v-col cols="12">
-              <TitleView title="RestApi" :path="['RestApi', 'Dodaj']" actions>
+              <TitleView title="RestApi" :path="path" actions>
                 <template #actions>
-                  <v-btn flat variant="text" class="mr-4" @click="goToRestApi"> Anuluj </v-btn>
-                  <v-btn v-if="!isPreviewMode" type="submit" flat color="primary"> Dodaj </v-btn>
+                  <v-btn
+                    flat
+                    variant="text"
+                    :class="{ 'mr-4': isEditMode || isAddMode }"
+                    @click="goToRestApi"
+                  >
+                    Anuluj
+                  </v-btn>
+                  <v-btn v-if="!isPreviewMode" type="submit" flat color="primary">
+                    {{ isEditMode ? 'Edytuj' : 'Dodaj' }}
+                  </v-btn>
                 </template>
               </TitleView>
             </v-col>
