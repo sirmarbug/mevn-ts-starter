@@ -4,7 +4,8 @@ import ChatWrapper from './components/ChatWrapper/ChatWrapper.vue'
 import ChatInput from './components/ChatInput/ChatInput.vue'
 import { useChatStore } from '@/stores/chat'
 import { storeToRefs } from 'pinia'
-import { onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
+import { initChat } from '@/websockets'
 
 const chatStore = useChatStore()
 const { isConnection } = storeToRefs(chatStore)
@@ -17,6 +18,10 @@ const connectionHandle = () => {
 const disconnectionHandle = () => {
   stop()
 }
+
+onMounted(() => {
+  initChat()
+})
 
 onUnmounted(() => {
   stop()
