@@ -1,18 +1,17 @@
 <script setup lang="ts">
-// defineProps({
-//   title: { type: String, required: true },
-//   path: { type: Array, required: true },
-//   backAction: { type: Boolean },
-//   actions: { type: Boolean }
-// })
-
 import { ref } from 'vue'
 import dayjs from 'dayjs'
+import { useChatStore } from '@/stores/chat'
+import { storeToRefs } from 'pinia'
+
+const chatStore = useChatStore()
+const { isConnection } = storeToRefs(chatStore)
+const { sendMessage } = chatStore
 
 const message = ref('')
 
 const sendMessageHandle = () => {
-  console.log('sendMessageHandle', message.value)
+  sendMessage(message.value)
   message.value = ''
 }
 </script>
@@ -26,6 +25,7 @@ const sendMessageHandle = () => {
       append-inner-icon="mdi-send"
       single-line
       hide-details
+      :disabled="!isConnection"
       @click:append-inner="sendMessageHandle"
       @keydown.enter="sendMessageHandle"
     ></v-text-field>

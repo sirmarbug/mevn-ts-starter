@@ -1,12 +1,13 @@
 import { io } from 'socket.io-client'
+import { useChatStore } from '@/stores/chat'
 
-const socket = io(import.meta.env.VITE_WS_URL)
+const socket = io(import.meta.env.VITE_WS_URL).disconnect()
 
-export const connect = () => {
+export const connectChat = () => {
   socket.connect()
 }
 
-export const disconnect = () => {
+export const disconnectChat = () => {
   socket.disconnect()
 }
 
@@ -18,10 +19,14 @@ socket.on('disconnect', () => {
   console.log('disconnected', socket.id)
 })
 
-socket.on('message', (data: string) => {
-  console.log('received - message', data)
+socket.on('message', (msg: string) => {
+  console.log('[WS - Received - message]', msg)
+  const chatStore = useChatStore()
+  const { addMessage } = chatStore
+  addMessage(msg)
 })
 
-export const sendMessage = (msg: string) => {
+export const sendMessageChat = (msg: string) => {
+  console.log('[WS - Send - message]', msg)
   socket.emit('message', msg)
 }

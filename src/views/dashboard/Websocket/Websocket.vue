@@ -2,6 +2,25 @@
 import TitleView from '@/components/TitleView/TitleView.vue'
 import ChatWrapper from './components/ChatWrapper/ChatWrapper.vue'
 import ChatInput from './components/ChatInput/ChatInput.vue'
+import { useChatStore } from '@/stores/chat'
+import { storeToRefs } from 'pinia'
+import { onUnmounted } from 'vue'
+
+const chatStore = useChatStore()
+const { isConnection } = storeToRefs(chatStore)
+const { start, stop } = chatStore
+
+const connectionHandle = () => {
+  start()
+}
+
+const disconnectionHandle = () => {
+  stop()
+}
+
+onUnmounted(() => {
+  stop()
+})
 </script>
 
 <template>
@@ -12,8 +31,18 @@ import ChatInput from './components/ChatInput/ChatInput.vue'
           <v-col cols="12">
             <TitleView title="Websocket" :path="['Websocket']" actions>
               <template #actions>
-                <v-btn flat color="error" class="mr-4" disabled> Rozłącz </v-btn>
-                <v-btn flat color="primary"> Połącz </v-btn>
+                <v-btn
+                  flat
+                  color="error"
+                  class="mr-4"
+                  :disabled="!isConnection"
+                  @click="disconnectionHandle"
+                >
+                  Rozłącz
+                </v-btn>
+                <v-btn flat color="primary" :disabled="isConnection" @click="connectionHandle">
+                  Połącz
+                </v-btn>
               </template>
             </TitleView>
           </v-col>
