@@ -4,12 +4,15 @@ import { useUsersStore } from '@/stores/users'
 import { storeToRefs } from 'pinia'
 import { defineAsyncComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCommonStore } from '@/stores/common'
 const ConfirmRemoveUserDialog = defineAsyncComponent(
   () => import('@/components/dialogs/ConfirmDialog/ConfirmDialog.vue')
 )
 
 const router = useRouter()
 const usersStore = useUsersStore()
+const commonStore = useCommonStore()
+const { displaySnackbar } = commonStore
 
 const { users } = storeToRefs(usersStore)
 
@@ -41,13 +44,37 @@ const cancelRemoveUserHandle = () => {
 }
 
 const confirmRemoveUserHandle = async () => {
-  displayConfirmRemoveUserDialog.value = false
-  await remove(selectedUserToRemove.value.id)
-  selectedUserToRemove.value = null
+  try {
+    await remove(selectedUserToRemove.value.id)
+    displayConfirmRemoveUserDialog.value = false
+    selectedUserToRemove.value = null
+    displaySnackbar({
+      text: 'Poprawnie usunięto użytkownika',
+      color: 'success'
+    })
+  } catch (e) {
+    if (!(e instanceof Error)) {
+      return
+    }
+    displaySnackbar({
+      text: e.message,
+      color: 'error'
+    })
+  }
 }
 
 onMounted(async () => {
-  await getAllUser()
+  try {
+    await getAllUser()
+  } catch (e) {
+    if (!(e instanceof Error)) {
+      return
+    }
+    displaySnackbar({
+      text: e.message,
+      color: 'error'
+    })
+  }
 })
 </script>
 

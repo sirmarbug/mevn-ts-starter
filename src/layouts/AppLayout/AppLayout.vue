@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import AppNavbar from './AppNavbar.vue'
 import AppSidebar from './AppSidebar.vue'
+import Snackbar from '@/components/Snackbar/Snackbar.vue'
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import AppSidebar from './AppSidebar.vue'
         </v-container>
       </v-main>
     </v-layout>
+    <Snackbar />
   </v-app>
 </template>
 
