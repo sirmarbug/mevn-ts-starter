@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useTheme } from 'vuetify'
+import { useRouter } from 'vue-router'
 
 const theme = useTheme()
+const router = useRouter()
 
 const darkMode = ref<boolean>(false)
 
 const changeThemeModeHandle = () => {
   darkMode.value = !darkMode.value
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
+
+const logoutHandle = () => {
+  localStorage.removeItem('token')
+  router.push({ name: 'Login' })
 }
 </script>
 
@@ -22,7 +29,7 @@ const changeThemeModeHandle = () => {
     </v-btn>
     <v-menu width="350" location="bottom">
       <template v-slot:activator="{ props }">
-        <v-badge dot color="red" class="ml-4 mr-8" v-bind="props">
+        <v-badge dot color="red" class="ml-4 mr-8 pointer" v-bind="props">
           <v-icon icon="mdi-bell-outline" size="x-large"></v-icon>
         </v-badge>
       </template>
@@ -67,17 +74,17 @@ const changeThemeModeHandle = () => {
     </v-menu>
     <v-menu width="200">
       <template v-slot:activator="{ props }">
-        <v-avatar color="primary" v-bind="props">
+        <v-avatar color="primary" v-bind="props" class="pointer">
           <v-icon icon="mdi-account-circle"></v-icon>
         </v-avatar>
       </template>
 
       <v-list>
-        <v-list-item prepend-icon="mdi-account">
+        <v-list-item prepend-icon="mdi-account" value="1">
           <v-list-item-title>Profil</v-list-item-title>
         </v-list-item>
         <v-divider />
-        <v-list-item prepend-icon="mdi-logout">
+        <v-list-item prepend-icon="mdi-logout" value="2" @click="logoutHandle">
           <v-list-item-title>Wyloguj</v-list-item-title>
         </v-list-item>
       </v-list>
