@@ -67,14 +67,28 @@ const snackbar = ref(false)
           <v-col cols="12">
             <v-card flat class="rounded-xl pa-6">
               <span class="text-h5">Buttons</span>
-              <div class="d-flex justify-space-between mt-8">
-                <v-btn>elevated (default)</v-btn>
-                <v-btn variant="flat">flat</v-btn>
-                <v-btn variant="tonal">tonal</v-btn>
-                <v-btn variant="outlined">outlined</v-btn>
-                <v-btn variant="text">text</v-btn>
-                <v-btn variant="plain">plain</v-btn>
-              </div>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn>elevated (default)</v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn variant="flat">flat</v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn variant="tonal">tonal</v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn variant="outlined">outlined</v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn variant="text">text</v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn variant="plain">plain</v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
             </v-card>
           </v-col>
           <v-col cols="12" sm="6">
@@ -103,27 +117,34 @@ const snackbar = ref(false)
           <v-col cols="12" sm="6">
             <v-card flat class="rounded-xl pa-6">
               <span class="text-h5">Tooltip</span>
-              <div class="d-flex justify-space-around mt-8">
-                <v-btn>
-                  Start
-                  <v-tooltip activator="parent" location="start">Tooltip</v-tooltip>
-                </v-btn>
-
-                <v-btn>
-                  End
-                  <v-tooltip activator="parent" location="end">Tooltip</v-tooltip>
-                </v-btn>
-
-                <v-btn>
-                  Top
-                  <v-tooltip activator="parent" location="top">Tooltip</v-tooltip>
-                </v-btn>
-
-                <v-btn>
-                  Bottom
-                  <v-tooltip activator="parent" location="bottom">Tooltip</v-tooltip>
-                </v-btn>
-              </div>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn>
+                      Start
+                      <v-tooltip activator="parent" location="start">Tooltip</v-tooltip>
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn>
+                      End
+                      <v-tooltip activator="parent" location="end">Tooltip</v-tooltip>
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn>
+                      Top
+                      <v-tooltip activator="parent" location="top">Tooltip</v-tooltip>
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4" lg="3">
+                    <v-btn>
+                      Bottom
+                      <v-tooltip activator="parent" location="bottom">Tooltip</v-tooltip>
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
             </v-card>
           </v-col>
         </v-row>

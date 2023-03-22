@@ -21,8 +21,9 @@ const logoutHandle = () => {
 
 <template>
   <v-app-bar flat class="px-4">
+    <v-app-bar-nav-icon class="ma-0 hidden-sm-and-up"></v-app-bar-nav-icon>
     <img alt="Vue logo" src="@/assets/logo.svg" width="40" height="40" />
-    <v-app-bar-title> Starter Vue 3 TS </v-app-bar-title>
+    <v-app-bar-title class="hidden-xs"> Starter Vue 3 TS </v-app-bar-title>
     <v-spacer />
     <v-btn icon flat @click="changeThemeModeHandle">
       <v-icon :icon="darkMode ? 'mdi-weather-night' : 'mdi-white-balance-sunny'"></v-icon>
