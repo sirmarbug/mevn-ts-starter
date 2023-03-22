@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { isLogin, isNotLogin } from '@/router/guards'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,8 @@ const router = createRouter({
           name: 'Register',
           component: () => import('@/views/auth/Register.vue')
         }
-      ]
+      ],
+      beforeEnter: isNotLogin
     },
     {
       path: '/dashboard',
@@ -81,7 +83,8 @@ const router = createRouter({
           name: 'Websocket',
           component: () => import('@/views/dashboard/Websocket/Websocket.vue')
         }
-      ]
+      ],
+      beforeEnter: isLogin
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/views/NotFound.vue') }
   ]
