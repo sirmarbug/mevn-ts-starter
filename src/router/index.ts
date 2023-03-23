@@ -86,6 +86,12 @@ const router = createRouter({
       ],
       beforeEnter: isLogin
     },
+    {
+      path: '/server-error',
+      name: 'ServerError',
+      component: () => import('@/views/ServerError.vue')
+    },
+    { path: '/forbidden', name: 'Forbidden', component: () => import('@/views/Forbidden.vue') },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/views/NotFound.vue') }
   ]
 })

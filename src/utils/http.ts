@@ -28,14 +28,12 @@ http.interceptors.response.use(
     console.log('[HTTP RESPONSE - Error]', error)
     const status = error.response.status
     if (status === 500) {
-      console.error(500)
+      await router.push({ name: 'ServerError' })
     } else if (status === 404) {
-      console.error(404)
       await router.push({ name: 'NotFound' })
     } else if (status === 403) {
-      console.error(403)
+      await router.push({ name: 'Forbidden' })
     } else if (status === 401) {
-      console.error(401)
       await router.push({ name: 'Login' })
     }
     return Promise.reject(error)
