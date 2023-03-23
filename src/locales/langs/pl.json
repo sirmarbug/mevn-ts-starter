@@ -4,5 +4,9 @@
     "minChars": "Minimalna liczba znaków to {min}",
     "car": "samochód | samochody",
     "apple": "brak jabłek | jedno jabłko | {count} jabłek"
+  },
+  "error": {
+    "global": "Coś poszło nie tak. Już nad tym pracujemy",
+    "one": "Błąd"
   }
 }

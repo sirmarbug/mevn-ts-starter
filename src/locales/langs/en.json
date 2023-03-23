@@ -4,5 +4,9 @@
     "minChars": "The minimum number of characters is {min}",
     "car": "car | cars",
     "apple": "no apples | one apple | {count} apples"
+  },
+  "error": {
+    "global": "Something went wrong. We're already working on it",
+    "one": "Error"
   }
 }

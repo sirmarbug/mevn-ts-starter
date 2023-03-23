@@ -5,7 +5,7 @@ import { addUser, fetchUsers, removeUser, updateUser } from '@/api'
 export const useUsersStore = defineStore('users', () => {
   const users = ref<any>([])
   const getAllUser = async () => {
-    const { data } = await fetchUsers()
+    const data = await fetchUsers()
     users.value = data
   }
 
