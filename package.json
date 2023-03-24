@@ -1,0 +1,17 @@
+{
+  "name": "vue3-ts-starter",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://sirmarbug@github.com/sirmarbug/vue3-ts-starter.git"
+  },
+  "author": "Mariusz Bugajski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sirmarbug/vue3-ts-starter/issues"
+  },
+  "homepage": "https://github.com/sirmarbug/vue3-ts-starter#readme"
+}
