@@ -1,8 +1,7 @@
 import { http } from '@/utils'
-import { get } from '@/utils/http'
 
 export const fetchUsers = () => {
-  return get('users')
+  return http.get('users')
 }
 
 export const fetchUserDetails = (id: string | string[]) => {

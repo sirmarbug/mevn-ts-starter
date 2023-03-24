@@ -35,37 +35,21 @@ http.interceptors.response.use(
       await router.push({ name: 'Forbidden' })
     } else if (status === 401) {
       await router.push({ name: 'Login' })
+    } else if (status === 400) {
+      const commonStore = useCommonStore()
+      const { displaySnackbar } = commonStore
+      if (error instanceof AxiosError) {
+        const notification = error.response?.data?.code || 'error.global'
+        displaySnackbar({
+          text: i18n.global.t(notification),
+          color: 'error'
+        })
+      } else {
+        await router.push({ name: 'ServerError' })
+      }
     }
     return Promise.reject(error)
   }
 )
-
-const errorHandle = (e: unknown) => {
-  const commonStore = useCommonStore()
-  const { displaySnackbar } = commonStore
-  if (e instanceof AxiosError) {
-    displaySnackbar({
-      text: i18n.global.t(e.response?.data.code),
-      color: 'error'
-    })
-  } else {
-    displaySnackbar({
-      text: i18n.global.t('error.global'),
-      color: 'error'
-    })
-  }
-}
-
-export const get = async (url: string, config?: any) => {
-  let result: any = {}
-  try {
-    const { data } = await http.get(url, config)
-    result = data
-    return result
-  } catch (e) {
-    errorHandle(e)
-    return result
-  }
-}
 
 export default http

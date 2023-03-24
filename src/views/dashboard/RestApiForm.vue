@@ -48,6 +48,15 @@ const userForm = ref<any>({
   }
 })
 
+const fetchData = async () => {
+  try {
+    const { data } = await fetchUserDetails(route.params.id)
+    userForm.value = data
+  } catch (e) {
+    console.error(e)
+  }
+}
+
 const goToRestApi = () => {
   router.push({ name: 'RestApi' })
 }
@@ -60,19 +69,22 @@ const submitHandle = async () => {
     return
   }
 
-  if (isEditMode.value) {
-    await update(userForm.value)
-  } else {
-    await add(userForm.value)
-  }
+  try {
+    if (isEditMode.value) {
+      await update(userForm.value)
+    } else {
+      await add(userForm.value)
+    }
 
-  goToRestApi()
+    goToRestApi()
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 onMounted(async () => {
   if (isPreviewMode.value || isEditMode.value) {
-    const { data } = await fetchUserDetails(route.params.id)
-    userForm.value = data
+    await fetchData()
   }
 })
 </script>

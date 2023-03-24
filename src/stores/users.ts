@@ -4,9 +4,14 @@ import { addUser, fetchUsers, removeUser, updateUser } from '@/api'
 
 export const useUsersStore = defineStore('users', () => {
   const users = ref<any>([])
+
   const getAllUser = async () => {
-    const data = await fetchUsers()
-    users.value = data
+    try {
+      const { data } = await fetchUsers()
+      users.value = data
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const add = async (payload: any) => {

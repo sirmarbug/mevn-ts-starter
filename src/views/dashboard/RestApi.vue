@@ -44,13 +44,17 @@ const cancelRemoveUserHandle = () => {
 }
 
 const confirmRemoveUserHandle = async () => {
-  await remove(selectedUserToRemove.value.id)
-  displayConfirmRemoveUserDialog.value = false
-  selectedUserToRemove.value = null
-  displaySnackbar({
-    text: 'Poprawnie usunięto użytkownika',
-    color: 'success'
-  })
+  try {
+    await remove(selectedUserToRemove.value.id)
+    displayConfirmRemoveUserDialog.value = false
+    selectedUserToRemove.value = null
+    displaySnackbar({
+      text: 'Poprawnie usunięto użytkownika',
+      color: 'success'
+    })
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 onMounted(async () => {
