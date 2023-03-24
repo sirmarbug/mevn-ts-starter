@@ -12,7 +12,6 @@ const registerHandle = async () => {
   if (!valid) {
     return
   }
-  console.log('register', form.value)
   await router.push({ name: 'Login' })
 }
 

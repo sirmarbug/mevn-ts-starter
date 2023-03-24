@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { addUser, fetchUsers, removeUser, updateUser } from '@/api'
+import { error } from '@/utils/logger'
 
 export const useUsersStore = defineStore('users', () => {
   const users = ref<any>([])
@@ -10,7 +11,7 @@ export const useUsersStore = defineStore('users', () => {
       const { data } = await fetchUsers()
       users.value = data
     } catch (e) {
-      console.error(e)
+      error('fetchUsers', e)
     }
   }
 

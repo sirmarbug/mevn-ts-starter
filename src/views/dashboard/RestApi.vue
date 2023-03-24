@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import { defineAsyncComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from '@/stores/common'
+import { error } from '@/utils/logger'
 const ConfirmRemoveUserDialog = defineAsyncComponent(
   () => import('@/components/dialogs/ConfirmDialog/ConfirmDialog.vue')
 )
@@ -53,7 +54,7 @@ const confirmRemoveUserHandle = async () => {
       color: 'success'
     })
   } catch (e) {
-    console.error(e)
+    error('confirmRemoveUserHandle', e)
   }
 }
 

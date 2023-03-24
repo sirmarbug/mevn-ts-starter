@@ -12,7 +12,6 @@ const loginHandle = async () => {
   if (!valid) {
     return
   }
-  console.log('login', form.value)
   localStorage.setItem('token', Math.ceil(Math.random() * 1000).toString())
   await router.push({ name: 'Home' })
 }

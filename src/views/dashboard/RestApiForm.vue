@@ -6,6 +6,7 @@ import { useUsersStore } from '@/stores/users'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchUserDetails } from '@/api'
+import { error } from '@/utils/logger'
 
 const router = useRouter()
 const route = useRoute()
@@ -53,7 +54,7 @@ const fetchData = async () => {
     const { data } = await fetchUserDetails(route.params.id)
     userForm.value = data
   } catch (e) {
-    console.error(e)
+    error('fetchData', e)
   }
 }
 
@@ -78,7 +79,7 @@ const submitHandle = async () => {
 
     goToRestApi()
   } catch (e) {
-    console.error(e)
+    error('submitHandle', e)
   }
 }
 

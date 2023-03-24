@@ -8,7 +8,6 @@ export const useChatStore = defineStore('chat', () => {
   const messages = ref<any>([])
 
   const start = () => {
-    console.log('start')
     connectChat()
     isConnection.value = true
   }
