@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchUserDetails } from '@/api'
 import { error } from '@/utils/logger'
+import type { UserForm, VFormElement } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
@@ -14,11 +15,11 @@ const route = useRoute()
 const usersStore = useUsersStore()
 const { add, update } = usersStore
 
-const isAddMode = computed(() => route.name === 'RestApiAdd')
-const isPreviewMode = computed(() => route.name === 'RestApiDetails')
-const isEditMode = computed(() => route.name === 'RestApiEdit')
+const isAddMode = computed<boolean>(() => route.name === 'RestApiAdd')
+const isPreviewMode = computed<boolean>(() => route.name === 'RestApiDetails')
+const isEditMode = computed<boolean>(() => route.name === 'RestApiEdit')
 
-const path = computed(() => {
+const path = computed<string[]>(() => {
   const result = ['RestApi']
   if (isAddMode.value) {
     result.push('Dodaj')
@@ -32,7 +33,7 @@ const path = computed(() => {
   return result
 })
 
-const userForm = ref<any>({
+const userForm = ref<UserForm>({
   name: '',
   username: '',
   email: '',
@@ -62,9 +63,12 @@ const goToRestApi = () => {
   router.push({ name: 'RestApi' })
 }
 
-const form = ref<any>(null)
+const form = ref<VFormElement | null>(null)
 
 const submitHandle = async () => {
+  if (!form.value) {
+    return
+  }
   const { valid } = await form.value.validate()
   if (!valid) {
     return

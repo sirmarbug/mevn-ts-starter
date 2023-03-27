@@ -8,7 +8,7 @@ const chatStore = useChatStore()
 const { isConnection } = storeToRefs(chatStore)
 const { sendMessage } = chatStore
 
-const message = ref('')
+const message = ref<string>('')
 
 const sendMessageHandle = () => {
   sendMessage(message.value)

@@ -19,7 +19,7 @@ const confirmHandle = () => {
   emit('confirm')
 }
 
-const value = ref(true)
+const value = ref<boolean>(true)
 </script>
 
 <template>

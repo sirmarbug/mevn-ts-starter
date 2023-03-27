@@ -1,14 +1,15 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import type { Snackbar, SnackbarPayload } from '@/types'
 
 export const useCommonStore = defineStore('common', () => {
-  const snackbar = ref({
+  const snackbar = ref<Snackbar>({
     display: false,
     color: 'success',
-    text: 'Prrzykład',
+    text: 'Przykład',
     timeout: 5000
   })
-  const displaySnackbar = (payload: any) => {
+  const displaySnackbar = (payload: SnackbarPayload) => {
     snackbar.value = {
       display: true,
       timeout: 5000,

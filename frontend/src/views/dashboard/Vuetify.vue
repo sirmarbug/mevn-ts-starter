@@ -2,8 +2,9 @@
 import TitleView from '@/components/TitleView/TitleView.vue'
 import SectionTitle from '@/components/SectionTitle/SectionTitle.vue'
 import { ref } from 'vue'
+import type { DessertItem } from '@/types'
 
-const desserts = ref([
+const desserts = ref<DessertItem[]>([
   {
     name: 'Frozen Yogurt',
     calories: 159
@@ -46,7 +47,7 @@ const desserts = ref([
   }
 ])
 
-const snackbar = ref(false)
+const snackbar = ref<boolean>(false)
 </script>
 
 <template>

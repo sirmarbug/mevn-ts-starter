@@ -2,9 +2,10 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { addUser, fetchUsers, removeUser, updateUser } from '@/api'
 import { error } from '@/utils/logger'
+import type { UserDTO, UserForm, UserUpdatePayload } from '@/types'
 
 export const useUsersStore = defineStore('users', () => {
-  const users = ref<any>([])
+  const users = ref<UserDTO[]>([])
 
   const getAllUser = async () => {
     try {
@@ -15,18 +16,18 @@ export const useUsersStore = defineStore('users', () => {
     }
   }
 
-  const add = async (payload: any) => {
+  const add = async (payload: UserForm) => {
     const { data } = await addUser(payload)
     users.value.push(data)
   }
 
-  const update = async (payload: any) => {
+  const update = async (payload: UserUpdatePayload) => {
     await updateUser(payload, payload.id)
   }
 
   const remove = async (id: string | string[]) => {
     await removeUser(id)
-    users.value = users.value.filter((u: any) => u.id !== id)
+    users.value = users.value.filter((u: UserDTO) => u.id !== id)
   }
 
   return { users, getAllUser, add, update, remove }

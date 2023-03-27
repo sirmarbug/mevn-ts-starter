@@ -6,6 +6,7 @@ import { defineAsyncComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from '@/stores/common'
 import { error } from '@/utils/logger'
+import type { UserDTO } from '@/types'
 const ConfirmRemoveUserDialog = defineAsyncComponent(
   () => import('@/components/dialogs/ConfirmDialog/ConfirmDialog.vue')
 )
@@ -23,19 +24,19 @@ const addNewUserHandle = () => {
   router.push({ name: 'RestApiAdd' })
 }
 
-const showDetails = (user: any) => {
+const showDetails = (user: UserDTO) => {
   router.push({ name: 'RestApiDetails', params: { id: user.id } })
 }
 
-const goToEdit = (user: any) => {
+const goToEdit = (user: UserDTO) => {
   router.push({ name: 'RestApiEdit', params: { id: user.id } })
 }
 
-const selectedUserToRemove = ref()
+const selectedUserToRemove = ref<UserDTO | null>(null)
 
-const displayConfirmRemoveUserDialog = ref(false)
+const displayConfirmRemoveUserDialog = ref<boolean>(false)
 
-const removeUserHandle = (user: any) => {
+const removeUserHandle = (user: UserDTO) => {
   displayConfirmRemoveUserDialog.value = true
   selectedUserToRemove.value = user
 }
@@ -45,6 +46,9 @@ const cancelRemoveUserHandle = () => {
 }
 
 const confirmRemoveUserHandle = async () => {
+  if (!selectedUserToRemove.value) {
+    return
+  }
   try {
     await remove(selectedUserToRemove.value.id)
     displayConfirmRemoveUserDialog.value = false

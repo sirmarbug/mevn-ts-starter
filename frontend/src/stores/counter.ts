@@ -1,10 +1,11 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
+import type { CounterLog } from '@/types'
 
 export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const logs = ref<any>([])
+  const count = ref<number>(0)
+  const logs = ref<CounterLog[]>([])
   const decrement = () => {
     count.value--
     logs.value.push({

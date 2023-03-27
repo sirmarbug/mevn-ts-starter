@@ -3,10 +3,11 @@ import TitleView from '@/components/TitleView/TitleView.vue'
 import SectionTitle from '@/components/SectionTitle/SectionTitle.vue'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
+import type { LanguageItem } from '@/types'
 
 const { locale, t } = useI18n()
 
-const availableLanguages = [
+const availableLanguages: LanguageItem[] = [
   {
     title: 'Polski',
     value: 'pl'
@@ -17,7 +18,7 @@ const availableLanguages = [
   }
 ]
 
-const currentLanguage = ref(locale.value)
+const currentLanguage = ref<string>(locale.value)
 
 const changeLanguageHandle = () => {
   locale.value = currentLanguage.value

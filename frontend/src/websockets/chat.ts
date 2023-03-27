@@ -1,8 +1,9 @@
-import { io } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client'
 import { useChatStore } from '@/stores/chat'
 import { info } from '@/utils/logger'
+import type { WSEvents } from '@/types'
 
-let socket: any = null
+let socket: Socket<WSEvents, WSEvents> | null = null
 let chatStore: any = null
 
 export const initChat = () => {
@@ -16,11 +17,11 @@ export const connectChat = () => {
   socket = io(import.meta.env.VITE_WS_URL).connect()
 
   socket.on('connect', () => {
-    info('connected', socket.id)
+    info('connected', socket?.id)
   })
 
   socket.on('disconnect', () => {
-    info('disconnected', socket.id)
+    info('disconnected', socket?.id)
   })
 
   socket.on('message', (msg: string) => {
@@ -37,6 +38,9 @@ export const disconnectChat = () => {
 }
 
 export const sendMessageChat = (msg: string) => {
+  if (!socket) {
+    return
+  }
   info('[WS - Send - message]', msg)
   socket.emit('message', msg)
 }

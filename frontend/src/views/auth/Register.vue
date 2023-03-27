@@ -2,12 +2,16 @@
 import { RouterLink, useRouter } from 'vue-router'
 import { required, emailValidation, minChars, maxChars } from '@/validations'
 import { ref } from 'vue'
+import { VFormElement } from '@/types'
 
 const router = useRouter()
 
-const form = ref<any>(null)
+const form = ref<VFormElement | null>(null)
 
 const registerHandle = async () => {
+  if (!form.value) {
+    return
+  }
   const { valid } = await form.value.validate()
   if (!valid) {
     return

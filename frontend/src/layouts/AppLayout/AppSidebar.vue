@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import type { SidebarItem } from '@/types'
 
 const route = useRoute()
 
-const menu = ref([
+const menu = ref<SidebarItem[]>([
   {
     icon: 'mdi-monitor-dashboard',
     title: 'Dashboard',
@@ -43,7 +44,7 @@ const menu = ref([
   }
 ])
 
-const currentPage = computed(() => route.name)
+const currentPage = computed<string>(() => (route.name ? route.name.toString() : ''))
 </script>
 
 <template>
