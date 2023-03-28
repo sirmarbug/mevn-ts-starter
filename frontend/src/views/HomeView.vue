@@ -26,7 +26,7 @@ const goToApp = () => {
         class="d-flex flex-column justify-center align-center text-center"
       >
         <h1 class="text-primary">Starter Vue 3 + TS</h1>
-        <h2 class="text-primary">v.0.1.0</h2>
+        <h2 class="text-primary">v.1.0.0</h2>
       </v-col>
     </v-row>
     <v-row no-gutters>

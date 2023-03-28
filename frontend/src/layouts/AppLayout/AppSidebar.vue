@@ -65,7 +65,7 @@ const currentPage = computed<string>(() => (route.name ? route.name.toString() :
     <template #append>
       <v-container>
         <v-row>
-          <v-col class="d-flex justify-center text-secondary font-weight-bold"> v.0.1.0 </v-col>
+          <v-col class="d-flex justify-center text-secondary font-weight-bold"> v.1.0.0 </v-col>
         </v-row>
       </v-container>
     </template>
