@@ -6,7 +6,9 @@ import { useChatStore } from '@/stores/chat'
 import { storeToRefs } from 'pinia'
 import { onMounted, onUnmounted } from 'vue'
 import { initChat } from '@/websockets'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const chatStore = useChatStore()
 const { isConnection } = storeToRefs(chatStore)
 const { start, stop } = chatStore
@@ -43,10 +45,10 @@ onUnmounted(() => {
                   :disabled="!isConnection"
                   @click="disconnectionHandle"
                 >
-                  Rozłącz
+                  {{ t('common.connect') }}
                 </v-btn>
                 <v-btn flat color="primary" :disabled="isConnection" @click="connectionHandle">
-                  Połącz
+                  {{ t('common.disconnect') }}
                 </v-btn>
               </template>
             </TitleView>

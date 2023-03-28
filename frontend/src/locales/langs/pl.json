@@ -1,9 +1,140 @@
 {
-  "exampleTranslations": {
-    "hello": "Witaj",
-    "minChars": "Minimalna liczba znaków to {min}",
-    "car": "samochód | samochody",
-    "apple": "brak jabłek | jedno jabłko | {count} jabłek"
+  "common": {
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "fullName": "Imię i nazwisko",
+    "username": "Username",
+    "email": "Adres E-mail",
+    "phone": "Telefon",
+    "password": "Hasło",
+    "save": "Zapisz",
+    "edit": "Edytuj",
+    "add": "Dodaj",
+    "preview": "Podgląd",
+    "company": "Firma",
+    "website": "Strona WWW",
+    "city": "Miasto",
+    "street": "Ulica",
+    "zipcode": "Kod pocztowy",
+    "nr": "Numer lokalu",
+    "connect": "Połącz",
+    "disconnect": "Rozłącz"
+  },
+  "validation": {
+    "fieldIsRequired": "Pole jest wymagane",
+    "emailIsInvalid": "Niepoprawny adres email",
+    "minChars": "Minimalna liczba znaków to {count}",
+    "maxChars": "Maksymalna liczba znaków to {count}"
+  },
+  "languages": {
+    "polish": "Polski",
+    "english": "Angielski"
+  },
+  "login": {
+    "title": "Starter Vue 3 TS",
+    "subtitle": "Zaloguj się i poznaj wszystkie możliwości jakie daje ten starter",
+    "submit": "Zaloguj",
+    "youDontHaveAnAccountYet": "Nie masz jeszcze konta?",
+    "registerNow": "Założ je już teraz"
+  },
+  "register": {
+    "title": "Starter Vue 3 TS",
+    "subtitle": "Zarejestruj się i poznaj wszystkie możliwości jakie daje ten starter",
+    "submit": "Zarejestruj",
+    "alreadyHaveAnAccount": "Masz już konto?",
+    "loginNow": "Zaloguj się"
+  },
+  "forbidden": {
+    "title": "Błąd 403",
+    "subtitle": "Dostęp zabroniony",
+    "body": "Brak dostępu do tej części systemu",
+    "action": "Wróc do strony głównej"
+  },
+  "notFound": {
+    "title": "Błąd 404",
+    "subtitle": "Nie znaleziono",
+    "body": "Nasi programiści już pracują nad naprawieniem awarii. Spróbuj za chwilę ponownie.",
+    "action": "Wróc do strony głównej"
+  },
+  "serverError": {
+    "title": "Błąd 500",
+    "subtitle": "Przepraszamy wystąpił nieoczekiwany błąd.",
+    "body": "Nasi programiści już nad tym pracują",
+    "action": "Wróc do strony głównej"
+  },
+  "homeView": {
+    "title": "Projekt powstał aby każdy programista mógł rozpocząć pracę z nowym projektem we VueJS w jak naprostszy sposób.",
+    "author": "Autorem projektu jest",
+    "action": "Przejdź do aplikacji"
+  },
+  "dashboard": {
+    "name": "Strona główna",
+    "path": "Strona główna",
+    "title": "Witaj",
+    "subtitle": "Jesteś zalogowany do platformy. Poznaj jej wszystkie możliwości i wykorzystaj je w swoim projeckie."
+  },
+  "translate": {
+    "name": "Tłumaczenia",
+    "path": "Tłumaczenia",
+    "settings": {
+      "title": "Ustawienia",
+      "changeLanguage": "Zmień język",
+      "selectLanguage": "Wybierz język"
+    },
+    "example": {
+      "title": "Przykłady",
+      "basicTranslate": "Podstawowe tłumaczenie",
+      "translateWithParams": "Tłumaczenie z parametrami",
+      "pluralization": "Pluralizacja",
+      "hello": "Witaj",
+      "minChars": "Minimalna liczba znaków to {min}",
+      "car": "samochód | samochody",
+      "apple": "brak jabłek | jedno jabłko | {count} jabłek"
+    }
+  },
+  "store": {
+    "name": "Store",
+    "path": "Store",
+    "counter": {
+      "title": "Licznik",
+      "resetAction": "Reset"
+    },
+    "logs": {
+      "title": "Logi",
+      "decrement": "Dekrementacja",
+      "increment": "Inkrementacja",
+      "reset": "Reset"
+    }
+  },
+  "vuetify": {
+    "containment": "Przechowywanie",
+    "buttons": "Przyciski",
+    "tooltip": "Podpowiedzi",
+    "navigation": "Nawigacja",
+    "pagination": "Paginacja",
+    "forms": "Formularze",
+    "fields": "Pola",
+    "autcomplete": "Autouzupełnienie",
+    "displayData": "Wyświetlanie danych",
+    "name": "Nazwa",
+    "calories": "Kalorie",
+    "feedback": "Informacja zwrotna",
+    "alerts": "Alerty",
+    "progressCircular": "Pasek postępu kołowy",
+    "progressLinear": "Pasek postępu liniowy",
+    "openSnackbar": "Otwórz snackbar"
+  },
+  "rest": {
+    "tableHeaders": {
+      "fullName": "Imię i nazwisko",
+      "username": "Username",
+      "addressEmail": "Adres E-mail",
+      "actions": "Akcje"
+    },
+    "form": {
+      "basicData": "Podstawowe dane",
+      "address": "Adres"
+    }
   },
   "error": {
     "global": "Coś poszło nie tak. Już nad tym pracujemy",

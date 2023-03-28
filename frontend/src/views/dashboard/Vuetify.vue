@@ -3,6 +3,9 @@ import TitleView from '@/components/TitleView/TitleView.vue'
 import SectionTitle from '@/components/SectionTitle/SectionTitle.vue'
 import { ref } from 'vue'
 import type { DessertItem } from '@/types'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const desserts = ref<DessertItem[]>([
   {
@@ -61,13 +64,13 @@ const snackbar = ref<boolean>(false)
         </v-row>
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="CONTAINMENT"></SectionTitle>
+            <SectionTitle :title="t('vuetify.containment')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12">
             <v-card flat class="rounded-xl pa-6">
-              <span class="text-h5">Buttons</span>
+              <span class="text-h5">{{ t('vuetify.buttons') }}</span>
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4" lg="3">
@@ -117,7 +120,7 @@ const snackbar = ref<boolean>(false)
           </v-col>
           <v-col cols="12" sm="6">
             <v-card flat class="rounded-xl pa-6">
-              <span class="text-h5">Tooltip</span>
+              <span class="text-h5">{{ t('vuetify.tooltip') }}</span>
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="6" md="4" lg="3">
@@ -151,7 +154,7 @@ const snackbar = ref<boolean>(false)
         </v-row>
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="NAVIGATION"></SectionTitle>
+            <SectionTitle :title="t('vuetify.navigation')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>
@@ -165,7 +168,7 @@ const snackbar = ref<boolean>(false)
           </v-col>
           <v-col cols="12" sm="6">
             <v-card flat class="rounded-xl pa-6">
-              <span class="text-h5">Pagination</span>
+              <span class="text-h5">{{ t('vuetify.pagination') }}</span>
               <div class="mt-8">
                 <v-pagination :length="6"></v-pagination>
               </div>
@@ -174,13 +177,13 @@ const snackbar = ref<boolean>(false)
         </v-row>
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="FORM INPUTS & CONTROLS"></SectionTitle>
+            <SectionTitle :title="t('vuetify.forms')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12" sm="6">
             <v-card flat class="rounded-xl pa-6">
-              <span class="text-h5">Text Field</span>
+              <span class="text-h5">{{ $t('vuetify.fields') }}</span>
               <div class="mt-8">
                 <v-form>
                   <v-container>
@@ -236,7 +239,7 @@ const snackbar = ref<boolean>(false)
           </v-col>
           <v-col cols="12" sm="6">
             <v-card flat class="rounded-xl pa-6 h-100">
-              <span class="text-h5">Autocompletes</span>
+              <span class="text-h5">{{ $t('vuetify.autocompletes') }}</span>
               <div class="text-center mt-8">
                 <v-container>
                   <v-row>
@@ -277,7 +280,7 @@ const snackbar = ref<boolean>(false)
         </v-row>
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="DATA & DISPLAY"></SectionTitle>
+            <SectionTitle :title="$t('vuetify.displayData')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>
@@ -288,8 +291,8 @@ const snackbar = ref<boolean>(false)
                 <v-table density="compact">
                   <thead>
                     <tr>
-                      <th class="text-left">Name</th>
-                      <th class="text-left">Calories</th>
+                      <th class="text-left">{{ $t('vuetify.name') }}</th>
+                      <th class="text-left">{{ $t('vuetify.calories') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -305,13 +308,13 @@ const snackbar = ref<boolean>(false)
         </v-row>
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="FEEDBACK"></SectionTitle>
+            <SectionTitle :title="$t('vuetify.feedback')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12" sm="6">
             <v-card flat class="rounded-xl pa-6">
-              <span class="text-h5">Alerts</span>
+              <span class="text-h5">{{ $t('vuetify.alerts') }}</span>
               <div class="mt-8">
                 <v-container>
                   <v-row>
@@ -361,7 +364,7 @@ const snackbar = ref<boolean>(false)
               <v-row>
                 <v-col cols="12" class="pt-0">
                   <v-card flat class="rounded-xl pa-6 h-100">
-                    <span class="text-h5">Progress circular</span>
+                    <span class="text-h5">{{ $t('vuetify.progressCircular') }}</span>
                     <div class="d-flex justify-space-between mt-8">
                       <v-progress-circular indeterminate color="primary"></v-progress-circular>
 
@@ -379,7 +382,7 @@ const snackbar = ref<boolean>(false)
               <v-row>
                 <v-col cols="12">
                   <v-card flat class="rounded-xl pa-6 h-100">
-                    <span class="text-h5">Progress linear</span>
+                    <span class="text-h5">{{ $t('vuetify.progressLinear') }}</span>
                     <div class="mt-8">
                       <v-progress-linear indeterminate color="yellow-darken-2"></v-progress-linear>
                       <br />
@@ -397,7 +400,9 @@ const snackbar = ref<boolean>(false)
                   <v-card flat class="rounded-xl pa-6 h-100">
                     <span class="text-h5">Snackbars</span>
                     <div class="mt-8">
-                      <v-btn color="red-darken-2" @click="snackbar = true"> Open Snackbar </v-btn>
+                      <v-btn color="red-darken-2" @click="snackbar = true">
+                        {{ $t('vuetify.openSnackbar') }}
+                      </v-btn>
 
                       <v-snackbar v-model="snackbar" multi-line>
                         I am a multi-line snackbar. I can have more than one line. This is another

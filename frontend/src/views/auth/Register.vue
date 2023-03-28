@@ -3,7 +3,9 @@ import { RouterLink, useRouter } from 'vue-router'
 import { required, emailValidation, minChars, maxChars } from '@/validations'
 import { ref } from 'vue'
 import { VFormElement } from '@/types'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter()
 
 const form = ref<VFormElement | null>(null)
@@ -34,13 +36,13 @@ const toggleShowPasswordHandle = () => {
   </v-row>
   <v-row no-gutters class="mb-6">
     <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center">
-      <span class="text-h4">Starter Vue 3 TS</span>
+      <span class="text-h4">{{ t('register.title') }}</span>
     </v-col>
   </v-row>
   <v-row no-gutters class="mb-12">
     <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center text-center">
       <span class="text-subtitle-1">
-        Zarejestruj się i poznaj wszystkie możliwości jakie daje ten starter
+        {{ t('register.subtitle') }}
       </span>
     </v-col>
   </v-row>
@@ -48,7 +50,7 @@ const toggleShowPasswordHandle = () => {
     <v-row no-gutters>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
-          label="Imię"
+          :label="t('common.firstName')"
           variant="outlined"
           validate-on="blur"
           :rules="[required]"
@@ -56,7 +58,7 @@ const toggleShowPasswordHandle = () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
-          label="Nazwisko"
+          :label="t('common.lastName')"
           variant="outlined"
           validate-on="blur"
           :rules="[required]"
@@ -64,7 +66,7 @@ const toggleShowPasswordHandle = () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
-          label="Adres E-mail"
+          :label="t('common.email')"
           variant="outlined"
           validate-on="blur"
           :rules="[required, emailValidation]"
@@ -73,7 +75,7 @@ const toggleShowPasswordHandle = () => {
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
           :type="showPassword ? 'text' : 'password'"
-          label="Hasło"
+          :label="t('common.password')"
           variant="outlined"
           validate-on="blur"
           :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
@@ -84,15 +86,19 @@ const toggleShowPasswordHandle = () => {
     </v-row>
     <v-row no-gutters class="mb-12">
       <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center text-center">
-        <v-btn type="submit" variant="flat" color="primary" block size="large">Zaloguj się</v-btn>
+        <v-btn type="submit" variant="flat" color="primary" block size="large">
+          {{ t('register.submit') }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-form>
   <v-row no-gutters>
     <v-col cols="12" sm="6" offset-sm="3" class="d-flex flex-column align-center text-center">
       <span class="text-subtitle-1">
-        Masz jeszcze konta?
-        <RouterLink :to="{ name: 'Login' }">Zaloguj się</RouterLink>
+        {{ t('register.alreadyHaveAnAccount') }}
+        <RouterLink :to="{ name: 'Login' }">
+          {{ t('register.loginNow') }}
+        </RouterLink>
       </span>
     </v-col>
   </v-row>

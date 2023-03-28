@@ -7,8 +7,10 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchUserDetails } from '@/api'
 import { error } from '@/utils/logger'
-import type { UserForm, VFormElement } from '@/types'
+import type { UserForm, UserUpdatePayload, VFormElement } from '@/types'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 
@@ -22,13 +24,13 @@ const isEditMode = computed<boolean>(() => route.name === 'RestApiEdit')
 const path = computed<string[]>(() => {
   const result = ['RestApi']
   if (isAddMode.value) {
-    result.push('Dodaj')
+    result.push(t('common.add'))
   }
   if (isPreviewMode.value) {
-    result.push('Podgląd')
+    result.push(t('common.preview'))
   }
   if (isEditMode.value) {
-    result.push('Edytuj')
+    result.push(t('common.edit'))
   }
   return result
 })
@@ -76,7 +78,11 @@ const submitHandle = async () => {
 
   try {
     if (isEditMode.value) {
-      await update(userForm.value)
+      const user: UserUpdatePayload = {
+        id: route.params.id.toString(),
+        ...userForm.value
+      }
+      await update(user)
     } else {
       await add(userForm.value)
     }
@@ -104,7 +110,7 @@ onMounted(async () => {
               <TitleView title="RestApi" :path="path" actions back-action>
                 <template #actions>
                   <v-btn v-if="!isPreviewMode" type="submit" flat color="primary">
-                    {{ isEditMode ? 'Edytuj' : 'Dodaj' }}
+                    {{ isEditMode ? t('common.edit') : t('common.add') }}
                   </v-btn>
                 </template>
               </TitleView>
@@ -112,7 +118,7 @@ onMounted(async () => {
           </v-row>
           <v-row>
             <v-col cols="12">
-              <SectionTitle title="Podstawowe dane" />
+              <SectionTitle :title="t('rest.form.basicData')" />
             </v-col>
           </v-row>
           <v-row>
@@ -123,7 +129,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.name"
-                        label="Imię i nazwisko"
+                        :label="t('common.fullName')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
@@ -133,7 +139,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.username"
-                        label="Username"
+                        :label="t('common.username')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
@@ -145,7 +151,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.email"
-                        label="Email"
+                        :label="t('common.email')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required, emailValidation]"
@@ -155,7 +161,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.phone"
-                        label="Telefon"
+                        :label="t('common.phone')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
@@ -167,7 +173,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.company.name"
-                        label="Firma"
+                        :label="t('common.company')"
                         variant="outlined"
                         validate-on="blur"
                         :disabled="isPreviewMode"
@@ -176,7 +182,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.website"
-                        label="Strona www"
+                        :label="t('common.website')"
                         variant="outlined"
                         validate-on="blur"
                         :disabled="isPreviewMode"
@@ -189,7 +195,7 @@ onMounted(async () => {
           </v-row>
           <v-row>
             <v-col cols="12">
-              <SectionTitle title="Adress" />
+              <SectionTitle :title="t('rest.form.address')" />
             </v-col>
           </v-row>
           <v-row>
@@ -200,7 +206,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.address.city"
-                        label="Miasto"
+                        :label="t('common.city')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
@@ -210,7 +216,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.address.street"
-                        label="Ulica"
+                        :label="t('common.street')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
@@ -222,7 +228,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.address.zipcode"
-                        label="Kod pocztowy"
+                        :label="t('common.zipcode')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"
@@ -232,7 +238,7 @@ onMounted(async () => {
                     <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="userForm.address.suite"
-                        label="Numer lokalu"
+                        :label="t('common.nr')"
                         variant="outlined"
                         validate-on="blur"
                         :rules="[required]"

@@ -3,6 +3,9 @@ import TitleView from '@/components/TitleView/TitleView.vue'
 import SectionTitle from '@/components/SectionTitle/SectionTitle.vue'
 import { useCounterStore } from '@/stores/counter'
 import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const counter = useCounterStore()
 const { count, logs } = storeToRefs(counter)
@@ -15,13 +18,13 @@ const { decrement, increment, reset } = counter
       <v-container>
         <v-row>
           <v-col cols="12">
-            <TitleView title="Store" :path="['Store']"> </TitleView>
+            <TitleView :title="t('store.name')" :path="[t('store.path')]"> </TitleView>
           </v-col>
         </v-row>
         <!--COUNTER-->
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="Counter"></SectionTitle>
+            <SectionTitle :title="t('store.counter.title')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>
@@ -46,7 +49,9 @@ const { decrement, increment, reset } = counter
                 </v-row>
                 <v-row no-gutters>
                   <v-col cols="12" class="d-flex justify-center">
-                    <v-btn variant="flat" color="error" @click="reset">Reset</v-btn>
+                    <v-btn variant="flat" color="error" @click="reset">
+                      {{ t('store.counter.resetAction') }}
+                    </v-btn>
                   </v-col>
                 </v-row>
               </v-container>
@@ -56,7 +61,7 @@ const { decrement, increment, reset } = counter
         <!--LOGS-->
         <v-row>
           <v-col cols="12">
-            <SectionTitle title="Logs"></SectionTitle>
+            <SectionTitle :title="t('store.logs.title')"></SectionTitle>
           </v-col>
         </v-row>
         <v-row>

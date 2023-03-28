@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import GlobalLayout from '@/layouts/GlobalLayout/GlobalLayout.vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const router = useRouter()
 
 const goToApp = () => {
@@ -29,15 +32,14 @@ const goToApp = () => {
     <v-row no-gutters>
       <v-col cols="12">
         <p>
-          Projekt powstał aby każdy programista mógł rozpocząć pracę z nowym projektem we VueJS w
-          jak naprostszy sposób.
+          {{ t('homeView.title') }}
         </p>
-        <p>Autorem projektu jest <strong>Mariusz Bugajski</strong></p>
+        <p>{{ t('homeView.author') }} <strong>Mariusz Bugajski</strong></p>
       </v-col>
     </v-row>
     <v-row no-gutters class="pt-6">
       <v-col cols="12" sm="6" offset-sm="3" class="d-flex justify-center text-center">
-        <v-btn variant="flat" color="primary" @click="goToApp">Przejdź do aplikacji</v-btn>
+        <v-btn variant="flat" color="primary" @click="goToApp">{{ t('homeView.action') }}</v-btn>
       </v-col>
     </v-row>
   </GlobalLayout>

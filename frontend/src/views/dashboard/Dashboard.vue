@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import TitleView from '@/components/TitleView/TitleView.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -8,16 +11,15 @@ import TitleView from '@/components/TitleView/TitleView.vue'
       <v-container>
         <v-row>
           <v-col cols="12">
-            <TitleView title="Dashboard" :path="['Dashboard']"> </TitleView>
+            <TitleView :title="t('dashboard.name')" :path="[t('dashboard.path')]"> </TitleView>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12">
             <v-card flat class="rounded-xl pa-6">
-              <span class="text-h5">Witaj, Mariusz</span>
+              <span class="text-h5">{{ t('dashboard.title') }}</span>
               <p class="text-body-1">
-                Jesteś zalogowany do platformy. Poznaj jej wszystkie możliwości i wykorzystaj je w
-                swoim projeckie.
+                {{ t('dashboard.subtitle') }}
               </p>
             </v-card>
           </v-col>

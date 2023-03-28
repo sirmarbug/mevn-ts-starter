@@ -7,10 +7,12 @@ import { useRouter } from 'vue-router'
 import { useCommonStore } from '@/stores/common'
 import { error } from '@/utils/logger'
 import type { UserDTO } from '@/types'
+import { useI18n } from 'vue-i18n'
 const ConfirmRemoveUserDialog = defineAsyncComponent(
   () => import('@/components/dialogs/ConfirmDialog/ConfirmDialog.vue')
 )
 
+const { t } = useI18n()
 const router = useRouter()
 const usersStore = useUsersStore()
 const commonStore = useCommonStore()
@@ -75,7 +77,9 @@ onMounted(async () => {
           <v-col cols="12">
             <TitleView title="RestApi" :path="['RestApi']" actions>
               <template #actions>
-                <v-btn flat color="primary" @click="addNewUserHandle"> Dodaj </v-btn>
+                <v-btn flat color="primary" @click="addNewUserHandle">
+                  {{ $t('common.add') }}
+                </v-btn>
               </template>
             </TitleView>
           </v-col>
@@ -86,10 +90,10 @@ onMounted(async () => {
               <v-table>
                 <thead>
                   <tr>
-                    <th class="text-left">Name</th>
-                    <th class="text-left">Username</th>
-                    <th class="text-left">Email</th>
-                    <th class="text-left">Actions</th>
+                    <th class="text-left">{{ $t('rest.tableHeaders.fullName') }}</th>
+                    <th class="text-left">{{ $t('rest.tableHeaders.username') }}</th>
+                    <th class="text-left">{{ $t('rest.tableHeaders.addressEmail') }}</th>
+                    <th class="text-left">{{ $t('rest.tableHeaders.actions') }}</th>
                   </tr>
                 </thead>
                 <tbody>
