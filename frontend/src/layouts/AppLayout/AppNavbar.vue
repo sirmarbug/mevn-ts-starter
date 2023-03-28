@@ -2,7 +2,9 @@
 import { ref } from 'vue'
 import { useTheme } from 'vuetify'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const theme = useTheme()
 const router = useRouter()
 
@@ -82,11 +84,11 @@ const logoutHandle = () => {
 
       <v-list>
         <v-list-item prepend-icon="mdi-account" value="1">
-          <v-list-item-title>Profil</v-list-item-title>
+          <v-list-item-title>{{ t('navigation.profile') }}</v-list-item-title>
         </v-list-item>
         <v-divider />
         <v-list-item prepend-icon="mdi-logout" value="2" @click="logoutHandle">
-          <v-list-item-title>Wyloguj</v-list-item-title>
+          <v-list-item-title>{{ t('navigation.logout') }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>

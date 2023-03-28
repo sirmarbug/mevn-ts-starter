@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 defineProps({
-  title: { type: String, default: 'Potwierdź' },
+  title: { type: String, default: t('dialogs.confirmDialog.title') },
   subtitle: {
     type: String,
-    default: 'Czy Jesteś pewny, że chcesz dokończyć operację?'
+    default: t('dialogs.confirmDialog.subtitle')
   }
 })
 
@@ -31,8 +34,12 @@ const value = ref<boolean>(true)
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green-darken-1" variant="text" @click="cancelHandle"> Anuluj </v-btn>
-        <v-btn color="green-darken-1" variant="flat" @click="confirmHandle"> Potwierdź </v-btn>
+        <v-btn color="green-darken-1" variant="text" @click="cancelHandle">
+          {{ t('confirm.cancel') }}
+        </v-btn>
+        <v-btn color="green-darken-1" variant="flat" @click="confirmHandle">
+          {{ t('common.confirm') }}
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

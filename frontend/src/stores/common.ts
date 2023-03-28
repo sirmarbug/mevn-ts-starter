@@ -6,7 +6,7 @@ export const useCommonStore = defineStore('common', () => {
   const snackbar = ref<Snackbar>({
     display: false,
     color: 'success',
-    text: 'Przykład',
+    text: '',
     timeout: 5000
   })
   const displaySnackbar = (payload: SnackbarPayload) => {
