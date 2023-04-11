@@ -7,6 +7,8 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const route = useRoute()
 
+const version = `v.${import.meta.env.VITE_APP_VERSION}`
+
 const menu = ref<SidebarItem[]>([
   {
     icon: 'mdi-monitor-dashboard',
@@ -65,7 +67,9 @@ const currentPage = computed<string>(() => (route.name ? route.name.toString() :
     <template #append>
       <v-container>
         <v-row>
-          <v-col class="d-flex justify-center text-secondary font-weight-bold"> v.1.0.0 </v-col>
+          <v-col class="d-flex justify-center text-secondary font-weight-bold">
+            {{ version }}
+          </v-col>
         </v-row>
       </v-container>
     </template>
