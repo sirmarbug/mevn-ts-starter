@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps({
-  title: { type: String, required: true }
-})
+interface SectionTitleProps {
+  title: string
+}
+
+defineProps<SectionTitleProps>()
 </script>
 
 <template>
