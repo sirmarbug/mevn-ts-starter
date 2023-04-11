@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, withDefaults } from 'vue'
 import { useI18n } from 'vue-i18n'
+import i18n from '@/locales'
 
-const { t } = useI18n()
+interface ConfirmDialogProps {
+  title?: string
+  subtitle?: string
+}
 
-defineProps({
-  title: { type: String, default: t('dialogs.confirmDialog.title') },
-  subtitle: {
-    type: String,
-    default: t('dialogs.confirmDialog.subtitle')
-  }
+withDefaults(defineProps<ConfirmDialogProps>(), {
+  title: i18n.global.t('dialogs.confirmDialog.title'),
+  subtitle: i18n.global.t('dialogs.confirmDialog.subtitle')
 })
 
 const emit = defineEmits(['confirm', 'cancel'])
+
+const { t } = useI18n()
 
 const cancelHandle = () => {
   emit('cancel')
@@ -35,7 +38,7 @@ const value = ref<boolean>(true)
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="green-darken-1" variant="text" @click="cancelHandle">
-          {{ t('confirm.cancel') }}
+          {{ t('common.cancel') }}
         </v-btn>
         <v-btn color="green-darken-1" variant="flat" @click="confirmHandle">
           {{ t('common.confirm') }}
