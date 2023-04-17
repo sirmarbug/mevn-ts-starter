@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-defineProps({
-  title: { type: String, required: true },
-  path: { type: Array, required: true },
-  backAction: { type: Boolean },
-  actions: { type: Boolean }
+interface TitleViewProps {
+  title: string
+  path: string[]
+  backAction?: boolean
+  actions?: boolean
+}
+
+withDefaults(defineProps<TitleViewProps>(), {
+  backAction: false,
+  actions: false
 })
 
 const router = useRouter()
