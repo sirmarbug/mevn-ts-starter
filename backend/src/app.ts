@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors'
 import connect from "./configs/db";
@@ -12,6 +12,6 @@ const app: Express = express();
 app.use(express.json())
 app.use(cors())
 
-app.use(routes)
+app.use('/api', routes)
 
 export default app
