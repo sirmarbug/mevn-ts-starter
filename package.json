@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "repository": {
     "type": "git",
@@ -13,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/sirmarbug/vue3-ts-starter/issues"
   },
-  "homepage": "https://github.com/sirmarbug/vue3-ts-starter#readme"
+  "homepage": "https://github.com/sirmarbug/vue3-ts-starter#readme",
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.63"
+  }
 }
