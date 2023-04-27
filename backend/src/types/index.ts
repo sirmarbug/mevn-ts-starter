@@ -1,9 +1,14 @@
 import {Request} from "express";
 import {Document} from "mongoose";
+import {Socket} from "socket.io";
 
 
 export interface RequestWithUser extends Request {
-  user: User
+  user: TokenData
+}
+
+export interface SocketWithUser extends Socket {
+  user: TokenData
 }
 
 export interface User {
@@ -11,6 +16,13 @@ export interface User {
   lastName: string
   email: string
   password: string
+}
+
+export interface TokenData {
+  userId: string
+  email: string
+  firstName: string
+  lastName: string
 }
 
 export interface Author {

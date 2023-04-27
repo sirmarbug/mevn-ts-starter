@@ -1,6 +1,7 @@
 import jwt, {Secret, JwtPayload} from 'jsonwebtoken'
 import {Response, NextFunction, Request} from "express";
-import {RequestWithUser, User} from "../types";
+import {RequestWithUser, SocketWithUser, TokenData } from "../types";
+import {Socket} from "socket.io";
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers["authorization"]
@@ -16,7 +17,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     try {
         const SECRET_KEY: Secret = process.env.TOKEN_KEY || 'secred_key';
         const decode: string | JwtPayload = jwt.verify(token, SECRET_KEY);
-        (req as RequestWithUser).user = decode as User;
+        (req as RequestWithUser).user = decode as TokenData;
     } catch (e) {
         return res.status(401).json({
             error: {
@@ -25,6 +26,25 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
         })
     }
     return next()
+}
+
+export const verifyTokenOnWebSocket = (socket: Socket, next: any) => {
+    const token = socket.handshake.headers.authorization || socket.handshake.auth.token
+
+    if (!token || !token.length) {
+        next(new Error('Not found token'))
+        return
+    }
+
+    try {
+        const SECRET_KEY: Secret = process.env.TOKEN_KEY || 'secred_key';
+        const decode: string | JwtPayload = jwt.verify(token, SECRET_KEY);
+        (socket as SocketWithUser).user = decode as TokenData;
+        next()
+    } catch (e) {
+        console.log(e)
+        next(new Error('Invalid token'))
+    }
 }
 
 export default verifyToken
