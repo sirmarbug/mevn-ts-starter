@@ -48,3 +48,23 @@ export const sendBroadcastMessage = (event: string, message: string) => {
 
   io.emit(event, message)
 }
+
+export const sendMessage = (userId: string, event: string, message: string) => {
+  if(!io) {
+    return
+  }
+
+  const user = activeUsers.get(userId)
+
+  if (!user) {
+    return
+  }
+
+  const socket = io.sockets.sockets.get(user.socketId)
+
+  if (!socket) {
+    return
+  }
+
+  socket.emit(event, message)
+}
