@@ -1,4 +1,4 @@
-import {addActiveUser, io, removeActiveUser} from './index'
+import {addActiveUser, io, removeActiveUser, sendBroadcastMessage} from './index'
 import {Socket} from "socket.io";
 import {SocketWithUser} from "../types";
 
@@ -23,7 +23,5 @@ const disconnectListener = (socket: Socket) => {
 
 const messageListener = (message: string) => {
   console.log('[WS - Receive]', message)
-  if (io) {
-    io.emit('message', message)
-  }
+  sendBroadcastMessage('message', message)
 }

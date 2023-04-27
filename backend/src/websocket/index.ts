@@ -40,3 +40,11 @@ export const clearActiveUsers = () => {
   activeUsers.clear()
   console.log('active user:', activeUsers.size)
 }
+
+export const sendBroadcastMessage = (event: string, message: string) => {
+  if(!io) {
+    return
+  }
+
+  io.emit(event, message)
+}
