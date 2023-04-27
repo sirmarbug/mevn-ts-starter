@@ -35,3 +35,8 @@ export interface PostDocument extends Document {
   text: string
   date: Date
 }
+
+export interface ActiveUser {
+  socketId: string
+  user: TokenData
+}
