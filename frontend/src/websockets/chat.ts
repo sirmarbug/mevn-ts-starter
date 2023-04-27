@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import { useChatStore } from '@/stores/chat'
-import { info } from '@/utils/logger'
+import { error, info } from '@/utils/logger'
 import type { WSEvents } from '@/types'
 
 let socket: Socket<WSEvents, WSEvents> | null = null
@@ -14,7 +14,11 @@ export const connectChat = () => {
   if (socket) {
     return
   }
-  socket = io(import.meta.env.VITE_WS_URL).connect()
+  socket = io(import.meta.env.VITE_WS_URL, {
+    auth: {
+      token: localStorage.getItem('token') as string
+    }
+  }).connect()
 
   socket.on('connect', () => {
     info('connected', socket?.id)
@@ -22,6 +26,10 @@ export const connectChat = () => {
 
   socket.on('disconnect', () => {
     info('disconnected', socket?.id)
+  })
+
+  socket.on('connect_error', (e) => {
+    error('connect_error', e)
   })
 
   socket.on('message', (msg: string) => {
