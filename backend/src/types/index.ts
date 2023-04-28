@@ -40,3 +40,17 @@ export interface ActiveUser {
   socketId: string
   user: TokenData
 }
+
+export class ExtendError extends Error {
+  constructor(
+    public code: string,
+    public status: number,
+    public msg: string
+  ) {
+    super(msg)
+    this.status = status
+    this.code = code
+
+    Object.setPrototypeOf(this, ExtendError.prototype);
+  }
+}
