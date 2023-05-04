@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {ErrorResponseDTO, ExtendError} from "../types";
 
-export const createErrorObject = (err: ExtendError): ErrorResponseDTO => {
+const createErrorObject = (err: ExtendError): ErrorResponseDTO => {
   return {
     status: err.status,
     error: {
