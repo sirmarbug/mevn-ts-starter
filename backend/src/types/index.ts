@@ -45,12 +45,22 @@ export class ExtendError extends Error {
   constructor(
     public code: string,
     public status: number,
-    public msg: string
+    public message: string
   ) {
-    super(msg)
+    super(message)
     this.status = status
     this.code = code
 
     Object.setPrototypeOf(this, ExtendError.prototype);
   }
+}
+
+export interface ErrorResponse {
+  code: string
+  message: string
+}
+
+export interface ErrorResponseDTO {
+  status: number
+  error: ErrorResponse
 }

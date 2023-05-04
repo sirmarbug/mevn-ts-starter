@@ -1,8 +1,9 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 
 import Post from '../models/post'
+import {ExtendError} from "../types";
 
-export const getAll = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const posts = await Post.find()
 
@@ -11,11 +12,11 @@ export const getAll = async (req: Request, res: Response) => {
       total: posts.length
     })
   } catch (e) {
-    return res.status(500).json(e)
+    next(e)
   }
 }
 
-export const getById = async (req: Request, res: Response) => {
+export const getById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params
 
@@ -23,20 +24,16 @@ export const getById = async (req: Request, res: Response) => {
 
     return res.status(200).json(posts)
   } catch (e) {
-    return res.status(500).json(e)
+    next(e)
   }
 }
 
-export const create = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { text, firstName, lastName } = req.body
 
     if (!text) {
-      return res.status(400).json({
-        error: {
-          message: 'text is required'
-        }
-      })
+      throw new ExtendError('invalidData', 400, 'Invalid text')
     }
 
     const post = await Post.create({
@@ -49,30 +46,22 @@ export const create = async (req: Request, res: Response) => {
 
     return res.status(201).json(post)
   } catch (e) {
-    return res.status(500).json(e)
+    next(e)
   }
 }
 
-export const update = async (req: Request, res: Response) => {
+export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const postId = req.params.id
 
     if (!postId) {
-      return res.status(400).json({
-        error: {
-          message: "Post id is required"
-        }
-      })
+      throw new ExtendError('invalidData', 400, 'Post id is required')
     }
 
     const { text } = req.body
 
     if (!text) {
-      return res.status(400).json({
-        error: {
-          message: 'Text is required'
-        }
-      })
+      throw new ExtendError('invalidData', 400, 'Invalid text')
     }
 
     const result = await Post.findOneAndUpdate({
@@ -84,27 +73,19 @@ export const update = async (req: Request, res: Response) => {
     if (result) {
       return res.status(200).send()
     } else {
-      return res.status(404).json({
-        error: {
-          message: "Post not found"
-        }
-      })
+      throw new ExtendError('notFoundData', 400, 'Post not found')
     }
   } catch (e) {
-    return res.status(500).json(e)
+    next(e)
   }
 }
 
-export const remove = async (req: Request, res: Response) => {
+export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const postId = req.params.id
 
     if (!postId) {
-      return res.status(400).json({
-        error: {
-          message: "Post id is required"
-        }
-      })
+      throw new ExtendError('invalidData', 400, 'Post id is required')
     }
 
     const result = await Post.findOneAndRemove({ _id: postId })
@@ -112,13 +93,9 @@ export const remove = async (req: Request, res: Response) => {
     if (result) {
       return res.status(200).send()
     } else {
-      return res.status(404).json({
-        error: {
-          message: "Post not found"
-        }
-      })
+      throw new ExtendError('notFoundData', 400, 'Post not found')
     }
   } catch (e) {
-    return res.status(500).json(e)
+    next(e)
   }
 }
