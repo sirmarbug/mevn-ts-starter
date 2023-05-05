@@ -45,11 +45,12 @@ http.interceptors.response.use(
           text: i18n.global.t(notification),
           color: 'error'
         })
+        return Promise.reject(e.response?.data)
       } else {
         await router.push({ name: 'ServerError' })
       }
     }
-    return Promise.reject(error)
+    return Promise.reject(e)
   }
 )
 
