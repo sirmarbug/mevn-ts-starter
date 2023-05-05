@@ -107,3 +107,12 @@ export interface ChatMessage {
   date: string
   text: string
 }
+
+export interface LoginForm {
+  email: string
+  password: string
+}
+
+export interface LoginResponse {
+  token: string
+}
