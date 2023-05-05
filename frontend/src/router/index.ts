@@ -64,6 +64,26 @@ const router = createRouter({
           component: () => import('@/views/dashboard/RestApi.vue')
         },
         {
+          path: 'posts',
+          name: 'Posts',
+          component: () => import('@/views/dashboard/Posts.vue')
+        },
+        {
+          path: 'posts/add',
+          name: 'PostFormAdd',
+          component: () => import('@/views/dashboard/PostForm.vue')
+        },
+        {
+          path: 'posts/:id',
+          name: 'PostFormDetails',
+          component: () => import('@/views/dashboard/PostForm.vue')
+        },
+        {
+          path: 'posts/:id/edit',
+          name: 'PostFormEdit',
+          component: () => import('@/views/dashboard/PostForm.vue')
+        },
+        {
           path: 'rest-api/add',
           name: 'RestApiAdd',
           component: () => import('@/views/dashboard/RestApiForm.vue')
