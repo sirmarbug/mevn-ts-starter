@@ -116,3 +116,10 @@ export interface LoginForm {
 export interface LoginResponse {
   token: string
 }
+
+export interface RegisterForm {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
