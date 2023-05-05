@@ -2,13 +2,22 @@
 import { RouterLink, useRouter } from 'vue-router'
 import { required, emailValidation, minChars, maxChars } from '@/validations'
 import { ref } from 'vue'
-import { VFormElement } from '@/types'
+import { RegisterForm, VFormElement } from '@/types'
 import { useI18n } from 'vue-i18n'
+import { error } from '@/utils/logger'
+import { register } from '@/api/auth'
 
 const { t } = useI18n()
 const router = useRouter()
 
 const form = ref<VFormElement | null>(null)
+
+const registerForm = ref<RegisterForm>({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: ''
+})
 
 const registerHandle = async () => {
   if (!form.value) {
@@ -18,7 +27,13 @@ const registerHandle = async () => {
   if (!valid) {
     return
   }
-  await router.push({ name: 'Login' })
+
+  try {
+    await register(registerForm.value)
+    await router.push({ name: 'Login' })
+  } catch (e) {
+    error('registerHandle', e)
+  }
 }
 
 const showPassword = ref<boolean>()
@@ -50,6 +65,7 @@ const toggleShowPasswordHandle = () => {
     <v-row no-gutters>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
+          v-model="registerForm.firstName"
           :label="t('common.firstName')"
           variant="outlined"
           validate-on="blur"
@@ -58,6 +74,7 @@ const toggleShowPasswordHandle = () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
+          v-model="registerForm.lastName"
           :label="t('common.lastName')"
           variant="outlined"
           validate-on="blur"
@@ -66,6 +83,7 @@ const toggleShowPasswordHandle = () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
+          v-model="registerForm.email"
           :label="t('common.email')"
           variant="outlined"
           validate-on="blur"
@@ -74,6 +92,7 @@ const toggleShowPasswordHandle = () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
+          v-model="registerForm.password"
           :type="showPassword ? 'text' : 'password'"
           :label="t('common.password')"
           variant="outlined"

@@ -20,7 +20,8 @@
     "zipcode": "Kod pocztowy",
     "nr": "Numer lokalu",
     "connect": "Połącz",
-    "disconnect": "Rozłącz"
+    "disconnect": "Rozłącz",
+    "content": "Treść"
   },
   "validation": {
     "fieldIsRequired": "Pole jest wymagane",
@@ -36,7 +37,8 @@
     "profile": "Profil",
     "logout": "Wyloguj się",
     "dashboard": "Strona główna",
-    "translations": "Tłumaczenia"
+    "translations": "Tłumaczenia",
+    "posts": "Posty"
   },
   "login": {
     "title": "Starter Vue 3 TS",
@@ -142,6 +144,18 @@
     "form": {
       "basicData": "Podstawowe dane",
       "address": "Adres"
+    }
+  },
+  "posts": {
+    "tableHeaders": {
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "date": "Data",
+      "actions": "Akcje"
+    },
+    "form": {
+      "author": "Author",
+      "content": "Treść"
     }
   },
   "dialogs": {

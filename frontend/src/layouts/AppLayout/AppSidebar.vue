@@ -41,6 +41,12 @@ const menu = ref<SidebarItem[]>([
     to: '/dashboard/rest-api'
   },
   {
+    icon: 'mdi-book-open',
+    title: t('navigation.posts'),
+    value: 'Posts',
+    to: '/dashboard/posts'
+  },
+  {
     icon: 'mdi-web',
     title: 'Websocket',
     value: 'Websocket',

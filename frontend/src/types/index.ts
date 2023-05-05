@@ -11,6 +11,11 @@ export enum LogLevel {
 
 export type HttpResponse<T> = Promise<AxiosResponse<T>>
 
+export interface ResponseArray<T> {
+  items: T[]
+  total: number
+}
+
 export interface SidebarItem {
   icon: string
   title: string
@@ -106,4 +111,42 @@ export interface WSEvents {
 export interface ChatMessage {
   date: string
   text: string
+}
+
+export interface LoginForm {
+  email: string
+  password: string
+}
+
+export interface LoginResponse {
+  token: string
+}
+
+export interface RegisterForm {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
+
+export interface Author {
+  firstName: string
+  lastName: string
+}
+
+export interface Post {
+  author: Author
+  _id: string
+  text: string
+  date: Date
+}
+
+export interface PostForm {
+  firstName: string
+  lastName: string
+  text: string
+}
+
+export interface PostFormPayload extends PostForm {
+  _id: string
 }

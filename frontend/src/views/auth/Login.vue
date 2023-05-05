@@ -2,13 +2,20 @@
 import { RouterLink, useRouter } from 'vue-router'
 import { required, emailValidation } from '@/validations'
 import { ref } from 'vue'
-import type { VFormElement } from '@/types'
+import type { LoginForm, VFormElement } from '@/types'
 import { useI18n } from 'vue-i18n'
+import { login } from '@/api/auth'
+import { error } from '@/utils/logger'
 
 const { t } = useI18n()
 const router = useRouter()
 
 const form = ref<VFormElement | null>(null)
+
+const loginForm = ref<LoginForm>({
+  email: '',
+  password: ''
+})
 
 const loginHandle = async () => {
   if (!form.value) {
@@ -18,8 +25,14 @@ const loginHandle = async () => {
   if (!valid) {
     return
   }
-  localStorage.setItem('token', Math.ceil(Math.random() * 1000).toString())
-  await router.push({ name: 'Home' })
+
+  try {
+    const { data } = await login(loginForm.value)
+    localStorage.setItem('token', data.token)
+    await router.push({ name: 'Home' })
+  } catch (e) {
+    error('loginHandle', e)
+  }
 }
 
 const showPassword = ref<boolean>()
@@ -51,6 +64,7 @@ const toggleShowPasswordHandle = () => {
     <v-row no-gutters>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
+          v-model="loginForm.email"
           :label="t('common.email')"
           variant="outlined"
           validate-on="blur"
@@ -59,6 +73,7 @@ const toggleShowPasswordHandle = () => {
       </v-col>
       <v-col cols="12" sm="6" offset-sm="3" class="mb-4">
         <v-text-field
+          v-model="loginForm.password"
           :type="showPassword ? 'text' : 'password'"
           :label="t('common.password')"
           variant="outlined"
