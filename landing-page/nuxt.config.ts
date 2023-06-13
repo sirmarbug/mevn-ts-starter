@@ -5,5 +5,10 @@ export default defineNuxtConfig({
     'nuxt-quasar-ui',
     '@pinia/nuxt'
   ],
-  quasar: { /* */ }
+  quasar: { /* */ },
+  pinia: {
+    autoImports: [
+      'defineStore'
+    ],
+  }
 })

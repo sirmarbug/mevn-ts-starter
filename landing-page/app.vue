@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 const store = useCounterStore()
 console.log('store', store)
 const { count, doubleCount } = storeToRefs(store)
-const { increment, decrement } = store
+const { increment, decrement, reset } = store
 </script>
 
 <template>
@@ -14,6 +14,6 @@ const { increment, decrement } = store
     <h2>Counter double: {{ doubleCount }}</h2>
     <q-btn color="primary" label="Increment" @click="increment" />
     <QBtn color="secondary" label="Decrement" @click="decrement" />
-    <LazyQBtn color="amber" glossy label="Amber" />
+    <LazyQBtn color="amber" glossy label="Reset" @click="reset" />
   </div>
 </template>
