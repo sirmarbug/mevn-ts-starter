@@ -15,7 +15,6 @@
       <q-btn stretch flat class="gt-md" label="Opis" />
       <q-btn stretch flat class="gt-md" label="Funkcje" />
       <q-btn stretch flat class="gt-md" label="Cena" />
-      <q-btn stretch flat class="gt-md" label="Kontakt" />
     </q-toolbar>
   </q-header>
 </template>
