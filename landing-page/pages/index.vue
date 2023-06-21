@@ -12,6 +12,7 @@
   <div>
     <SectionsTop/>
     <SectionsFeatures/>
+    <SectionsRecommended/>
 <!--    <h1>Welcome to the homepage</h1>-->
 <!--    <h1>Counter: {{ count }}</h1>-->
 <!--    <h2>Counter double: {{ doubleCount }}</h2>-->
