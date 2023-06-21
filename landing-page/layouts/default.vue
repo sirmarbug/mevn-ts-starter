@@ -8,7 +8,7 @@
     <DefaultFooter/>
 
     <q-page-container>
-      <q-page class="q-pa-md">
+      <q-page>
         <slot/>
       </q-page>
     </q-page-container>
