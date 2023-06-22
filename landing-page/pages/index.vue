@@ -6,6 +6,9 @@
 // console.log('store', store)
 // const { count, doubleCount } = storeToRefs(store)
 // const { increment, decrement, reset } = store
+useHead({
+  title: 'Strona główna'
+})
 </script>
 
 <template>
