@@ -1,4 +1,16 @@
 <script lang="ts" setup>
+interface PostCardProps {
+  id: string
+  date: string
+  title: string
+  content: string
+}
+
+defineProps<PostCardProps>()
+
+const goToArticle = () => {
+  navigateTo(`/blog/123`)
+}
 </script>
 
 <template>
@@ -17,7 +29,7 @@
 
     <q-card-actions>
       <q-space />
-      <q-btn flat color="secondary" label="Więcej" />
+      <q-btn flat color="secondary" label="Więcej" @click="goToArticle" />
     </q-card-actions>
   </q-card>
 </template>
