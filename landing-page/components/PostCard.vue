@@ -1,29 +1,33 @@
 <script lang="ts" setup>
+import {usePostsStore} from "~/composable/usePosts";
+
 interface PostCardProps {
-  id: string
-  date: string
+  id: number
   title: string
-  content: string
+  body: string
 }
 
-defineProps<PostCardProps>()
+const props = defineProps<PostCardProps>()
+
+const { setSelectedPost } = usePostsStore()
 
 const goToArticle = () => {
-  navigateTo(`/blog/123`)
+  setSelectedPost(props.id, props.title, props.body)
+  navigateTo(`/blog/${props.id}`)
 }
 </script>
 
 <template>
-  <q-card class="my-card" flat bordered>
+  <q-card class="post-card" flat bordered>
     <q-img
         src="https://picsum.photos/800/600"
     />
 
     <q-card-section>
       <div class="text-overline">23.06.2023</div>
-      <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+      <div class="text-h5 q-mt-sm q-mb-xs">{{ title }}</div>
       <div class="text-caption text-grey">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        {{ body }}
       </div>
     </q-card-section>
 
@@ -35,5 +39,7 @@ const goToArticle = () => {
 </template>
 
 <style scoped>
-
+.post-card {
+  height: 100%;
+}
 </style>
